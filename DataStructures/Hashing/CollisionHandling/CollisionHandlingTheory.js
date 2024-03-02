@@ -17,5 +17,12 @@
  *                  -> Quadratic probing
  *                  -> double hasing
  * 
+ * 
+ * Chaining is generally done when the size of the data that we need to store is unknow to us and therefore we have to pick 
+ * a suitable size of the hash table close to a prime number.
+ * 
+ * Howeever openAddressing is done when the hashTable size that we are taking is greater than the number of data that
+ * we need to insert in the hashTable.
+ * 
  * We will discuss about them in detail.
  */

@@ -1,4 +1,11 @@
-/**So chaining is a way of handling collision, In order to understand chaining let's take an example
+/**
+ * The hashTable size which we are considering is generally smaller that the size of the data or the number of data elements
+ * which we are trying to deal with. 
+ * 
+ * Generally this data elements which we are dealing with are unknows and thus we consider a hashTable size close to a prime number.
+ * In such scenarios collisions are bound to happen.
+ * 
+ * So chaining is a way of handling collision, In order to understand chaining let's take an example
  * 
  * Let keys = {50,21,58,17,15,49,56,22,23,25}
  * Lets suppose we have a hash table with hash sections of 7, considering a random prime number as suppose we dont know
