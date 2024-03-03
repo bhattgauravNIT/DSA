@@ -5,6 +5,8 @@
  * Now in case of open addressing, we must know the input size and thus the size of the hash table is always greater than
  * or equal to the number of inputs and its cache friendly.
  * 
+ * HashTableSize >= number of input keys.
+ * 
  * Open Addressing can be done in three ways:
  * 
  * 1. Linear probing

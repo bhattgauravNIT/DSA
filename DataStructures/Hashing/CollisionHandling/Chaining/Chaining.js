@@ -1,5 +1,5 @@
 /** 
- * The problem statment is lets suppose we have keys,
+ * The problem statment is lets suppose we have keys coming in to get inserted like,
  * Let keys = {50,21,58,17,15,49,56,22,23,25}
  * Now we using a hash function which takes modulo of the keys by the size of the hashTable which we have choosen as 7(randomly).
  * Now our hashFunction inserts at the index of the arr (arr[i]%7)th index.
@@ -17,16 +17,16 @@
  * 
  * Now lets have a node class and a linked list class.
  * 
- * Lets' make all the enteries of the array initially null.
+ * Lets' make all the enteries of the hashTable initially null.
  * 
- * Now we iteratite over the keys which needs to be inserted in the hashTable, if the hashIndex that we calculated via
- * arr[i] % hashTableSize is already not occupied or hash[arr[i] % hashTableSize] === null then simply we insert a node at the position
- * and this node fpr sure will be the head of the linkList.
+ * Now lets consider the keys which needs to be inserted in the hashTable, if the hashIndex that we calculated via
+ * key % hashTableSize is already not occupied or hash[value % hashTableSize] === null then simply we insert a node at the position
+ * and this node for sure will be the head of the linkList.
  * there fore we have modified our add function of linkedList to just add a node and mark it as head.
  * 
- * If in case this index is already occupied or hash[arr[i] % hashTableSize] !== null clearly its a case of collision.
- * And now we need to get the head node present at that hashingIndex which is simply the index value of the array.
- * let current = hash[arr[i] % hashTableSize];
+ * If in case this index is already occupied or hash[key % hashTableSize] !== null clearly its a case of collision.
+ * And now we need to get the head node present at that hashingIndex which is simply the hashing index value.
+ * let current = hash[value % hashTableSize];
  * Now we iterate over the list till its end and insert a new node with the data of this key at the end of the list.
  * 
  * This way we have avoided collision via chaining and its the implementation of hashingInsert.
@@ -53,14 +53,12 @@ class LinkedList {
 }
 
 class Chaining {
-    hash = [];
-    hashTableSize = 7;
     /**consider only positive numbers for now
      * This case of negatives are handled in starProbelm of designing a map.
     */
-
-    arr = [50, 21, 58, 17, 15, 49, 56, 22, 23, 25];
-
+    hash = [];
+    hashTableSize = 7;
+    /**User dont specify the hashTableSize as its chaining and we consider some value prime. */
     constructor() {
         for (let i = 0; i < this.hashTableSize; i++) {
             this.hash[i] = null;
@@ -73,26 +71,24 @@ class Chaining {
 
     /** 0(1+ alpha) where alpha is the length of link list
      * 
-     * iteratite over the keys which needs to be inserted in the hashTable, if the hashIndex that we calculated via
-     * arr[i] % hashTableSize is already not occupied or hash[arr[i] % hashTableSize] === null then simply we insert a node at the position
+     * find the hashing index of the key which needs to be inserted in the hashTable, if the hashIndex that we calculated via
+     * key % hashTableSize is already not occupied or hash[key % hashTableSize] === null then simply we insert a node at the position
      * and this node for sure will be the head of the linkList.
      * there fore we have modified our add function of linkedList to just add a node and mark it as head.
      * 
      * else we formulate a linked list where hash[hashIndex] is already the head and thus we simply insert a node at the end of the linked list.
      */
-    insert() {
-        for (let i = 0; i < arr.length; i++) {
-            let hashIndex = this.hashing(arr[i]);
-            if (this.hash[hashIndex] === null) {
-                let ll = new LinkedList();
-                this.hash[hashIndex] = ll.add(arr[i]);
-            } else {
-                let current = this.hash[hashIndex];
-                while (current.next) {
-                    current = current.next;
-                }
-                current.next = new Node(arr[i]);
+    insert(value) {
+        let hashIndex = this.hashing(value);
+        if (this.hash[hashIndex] === null) {
+            let ll = new LinkedList();
+            this.hash[hashIndex] = ll.add(value);
+        } else {
+            let current = this.hash[hashIndex];
+            while (current.next) {
+                current = current.next;
             }
+            current.next = new Node(value);
         }
     }
     /**
@@ -115,7 +111,7 @@ class Chaining {
         if (hashIndex < 0 || hashIndex >= this.hashTableSize || this.hash[hashIndex] === null) {
             return false;
         }
-        let current = hash[hashIndex];
+        let current = this.hash[hashIndex];
         while (current.next !== null) {
             if (current.data === data) {
                 return true;
@@ -123,7 +119,7 @@ class Chaining {
             current = current.next;
         }
         if (current.data === data) return true;
-
+        return false;
     }
 
     /**
@@ -138,7 +134,7 @@ class Chaining {
     * 
     * Maintaining two pointers, prev and current.
     * If prev is null and we found that current.data === data this means the head is containing that data 
-    * thus we say head[i] = current.next, ie we update the head.
+    * thus we say head = current.next, ie we update the head. head is imply this.hash[hashIndex].
     * 
     * Else if prev is not null and we found the data i,e current.data === data this means simple
     * we need to remove the linkage between current.next and current and make linkage for prev.next thus
@@ -150,12 +146,12 @@ class Chaining {
         if (hashIndex < 0 || hashIndex >= this.hashTableSize || this.hash[hashIndex] === null) {
             console.log('Data not found');
         }
-        let current = hash[hashIndex];
+        let current = this.hash[hashIndex];
         let prev = null;
         while (current !== null) {
             if (current.data === data) {
                 if (prev === null) {
-                    hash[i] = current.next;
+                    this.hash[hashIndex] = current.next;
                 } else {
                     prev.next = current.next;
                     current.next = null;
@@ -167,3 +163,24 @@ class Chaining {
         }
     }
 }
+
+// keys = {50, 21, 58, 17, 15, 49, 56, 22, 23, 25};
+let ch = new Chaining();
+ch.insert(50);
+ch.insert(21);
+ch.insert(58);
+ch.insert(17);
+ch.insert(15);
+ch.insert(49);
+ch.insert(56);
+ch.insert(22);
+ch.insert(23);
+ch.insert(25);
+console.log(ch.hash);
+console.log(ch.search(50));
+console.log(ch.search(99));
+console.log(ch.search(49));
+ch.remove(21);
+console.log(ch.hash);
+ch.remove(56);
+console.log(ch.hash);

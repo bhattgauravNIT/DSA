@@ -1,7 +1,8 @@
 /**Linear probing
  * 
  * Lets take an example say we have some keys = {50,21,58,17,15,49,56,22,71,25}
- * So in total we have 10 keys and we are sure that its gonna be 10 only thus we are using open addressing.
+ * So in total we have 10 keys and we let the user decide
+ * how many keys he wish to insert in the hashTable thus we are using open addressing.
  * Now we maintain a hashTable of size 10 and have a hasing function.
  * Lets say this hashing function do key % hashTableSize ~= key % 10.
  * 
@@ -59,11 +60,10 @@
  */
 
 class LinerProbing {
-    arr = [50, 21, 58, 17, 15, 49, 56, 22, 71, 25];
     hashTable = [];
-    //hashSize is initiated to the input keys array length as its open addressing.
-    hashSize = this.arr.length;
-    constructor() {
+    /**hashSize is initiated to the input keys size as its open addressing.*/
+    constructor(size) {
+        this.hashSize = size
         for (let i = 0; i < this.hashSize; i++) {
             this.hashTable[i] = null;
         }
@@ -85,20 +85,18 @@ class LinerProbing {
      * if not null does a traversal in circular fashion starting from hashingIndex+1 till hashingIndex and looks
      * for the first null value/maxInt  index and place the key at that index.
      */
-    insert() {
-        for (let i = 0; i < this.arr.length; i++) {
-            let hashIndex = this.hash(this.arr[i]);
-            if (this.hashTable[hashIndex] === null || this.hashTable[hashIndex] === Number.MAX_SAFE_INTEGER) {
-                this.hashTable[hashIndex] = this.arr[i];
-            } else {
-                let index = hashIndex + 1;
-                while (index % this.hashSize !== hashIndex) {
-                    if (this.hashTable[index % this.hashSize] === null || this.hashTable[hashIndex] === Number.MAX_SAFE_INTEGER) {
-                        this.hashTable[index % this.hashSize] = this.arr[i];
-                        break;
-                    }
-                    index++;
+    insert(value) {
+        let hashIndex = this.hash(value);
+        if (this.hashTable[hashIndex] === null || this.hashTable[hashIndex] === Number.MAX_SAFE_INTEGER) {
+            this.hashTable[hashIndex] = value;
+        } else {
+            let index = hashIndex + 1;
+            while (index % this.hashSize !== hashIndex) {
+                if (this.hashTable[index % this.hashSize] === null || this.hashTable[hashIndex] === Number.MAX_SAFE_INTEGER) {
+                    this.hashTable[index % this.hashSize] = value;
+                    break;
                 }
+                index++;
             }
         }
     }
@@ -177,11 +175,22 @@ class LinerProbing {
         if (cnt === 0) console.log('Element not present in hashTable');
     }
 }
-
-let ll = new LinerProbing();
-ll.insert();
+// keys = {50, 21, 58, 17, 15, 49, 56, 22, 71, 25};
+let ll = new LinerProbing(10);
+ll.insert(50);
+ll.insert(21);
+ll.insert(58);
+ll.insert(17);
+ll.insert(15);
+ll.insert(49);
+ll.insert(56);
+ll.insert(22);
+ll.insert(71);
+ll.insert(25);
 console.log(ll.hashTable);
 console.log(ll.search(71));
-ll.delete(71);
+console.log(ll.search(91));
 ll.delete(71);
 console.log(ll.hashTable);
+ll.delete(71);
+
