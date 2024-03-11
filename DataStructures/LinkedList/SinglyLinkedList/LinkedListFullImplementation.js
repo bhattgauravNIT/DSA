@@ -1,5 +1,5 @@
-/**The major difference between a linked list and an array is that an array is a contigious memory allocation datastructure, however its not the case with
- * a linked list. 
+/**The major difference between a linked list and an array is that an array is a contigious memory allocation datastructure, 
+ * however its not the case with a linked list. 
  * 
  * A linked list is comprised of nodes where every node can have a data and address/pointer to the next node .
  * 
@@ -144,21 +144,16 @@ class LinkedList {
     /**print linked list
      * 
      * Print all the data of the list.
+     * Mark current as this.head and keep printing till current!== null
      * 
-     * If size is 0 then list is empty else mark current as this.head and keep printing till current.next!== null
+     * If list is empty current will be null and thus it wont print anything.
      * 
-     * For the last node when current.next === null, do a final priniting for the last node.
     */
     printList() {
-        if (this.size === 0) {
-            console.log('List is empty');
-        } else {
-            let current = this.head;
-            while (current.next) {
-                console.log(current.data);
-                current = current.next;
-            }
+        let current = this.head;
+        while (current !== null) {
             console.log(current.data);
+            current = current.next;
         }
     }
 

@@ -15,7 +15,7 @@ function majorityElement(arr) {
         i++;
     }
     for (let [key, value] of mp) {
-        if (value > (Math.floor(arr.length / 2))) {
+        if (value > arr.length / 2) {
             return arr.indexOf(key);
         }
     }
@@ -25,7 +25,11 @@ function majorityElement(arr) {
 /**Approach2: 0(n),O(1)
  * Moore's Voting algo 
  * 
- * This algo is basically the function majorityElement1.
+ * This algo is basically the function majorityElement1 and its implemented in two phases first phase
+ * is to find a potential majority element, second phase is to check if its truly a majority element by checking
+ * that its number of occurence is greater than n/2.
+ * 
+ * In oder to find the potential majority element.
  * 
  * So let's have a cnt = 1 initially and a majorityIndex = 0;
  * now iterate from i=1 till end.
@@ -34,7 +38,7 @@ function majorityElement(arr) {
  * 
  * This majority index will have the potential candiate that can be the majority element.
  * 
- * Now we have written another method according to question requiremnets to check if this majority element occurence is 
+ * Now in the second phase we need to check if this majority element occurence is 
  * greater than n/2 or not in the original array.
  * 
  * If yes, than its the answer, if no return -1.

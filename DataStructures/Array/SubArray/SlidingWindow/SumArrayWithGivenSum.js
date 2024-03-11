@@ -12,32 +12,39 @@
 /**Approach1: O(n^2),O(1) 
  * 
  * Ex: arr = [1,4,20,3,10,1], sum = 33
- * For every i(starting from 0) check for every j=i+1 till N.
- * If(the sm till now is greater than sum), then break the existing subArray and start from next starting index.
- * If(sm till now is less than keep incrementing j as we can still find a subArray with given sum).
- * If(sm === Sum) return true.
  * 
- * Now for case like [1] sum = 3
- * if the current sm is equal to the sum then its fine else its a false.
+ * This approach is also simple brute force, 
+ * 
+ * ex: arr = [10,20,30]
+ * 
+ * So all possible subArray i,e 
+ * [10],[10,20],[10,20,30],[20],[20,30],[30] will have sums respective as
+ * 
+ * 10,30,60,20,50,60
+ * 
+ * Its based on the fact that the sum fro subArray [10,20] will be nothing but the sum of previous subArray [10] + some 
+ * j element and so on...
+ * 
+ *  So if i have a pointer i= 0 till end of array and j starting from i till ending of j.
+ *   sm+= nums[j] then we will be able to get all the possible sums of all the possible subArrays for the given array.
+ * 
+ *  Thus we simply consider sum of all the possible subArrays starting from index i.
 */
 function hasSubArrayOfGivenSum(nums, k) {
-    let i = 0, j = 1, sm = Number.MIN_SAFE_INTEGER;
+    let i = 0;
     while (i < nums.length) {
-        sm = nums[i];
+        let sm = 0, j = i;
         while (j < nums.length) {
-            if (sm < k) {
-                sm += nums[j];
-                j++;
-            } else if (sm > k) {
-                break;
+            sm += nums[j];
+            if (sm === k) {
+                return true
             } else {
-                return true;
+                j++;
             }
         }
         i++;
-        j = i + 1;
     }
-    return sm === k;
+    return false;
 }
 
 /**Approach2: 0(n),0(1)
@@ -47,10 +54,13 @@ function hasSubArrayOfGivenSum(nums, k) {
  * however in this case we dont know the size of the window and there for we will be using the concept in which the size of
  * the window will readjust accordingly.
  * 
- * Now let's say the window starts at i=0 intially and end at j=0 initially
+ * Now let's say the window starts at i=0 intially and end at j=0 initially so i symbolises start of window and j symbolises
+ * end of the window.
+ *  lets have a sum initially as the arr[0].
  * If (current sm < sum) then the size of the window should increase as we need to accomodate more elements.
  * If current sm > sum , then we should shrink the size of the window as the current subArray cant accomodate any new 
- * element.
+ * element and by shirinking we mean to readuce the size by increasing the starting index of the window.
+ * 
  * If current sm === sum then its true.
  */
 

@@ -17,8 +17,8 @@
  */
 function elementFrequencies(arr) {
     let mp = new Map();
-    for (let i = 0; i < arr.length; i++) {
-        mp.has(arr[i]) ? mp.set(arr[i], mp.get(arr[i]) + 1) : mp.set(arr[i], 1);
+    for (const element of arr) {
+        mp.has(element) ? mp.set(element, mp.get(element) + 1) : mp.set(element, 1);
     }
     for (let [key, value] of mp) {
         console.log(`${key} => ${value}`);
