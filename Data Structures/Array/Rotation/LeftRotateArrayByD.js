@@ -1,5 +1,5 @@
 /**Given an array and an number d such that d <= nums.length.
- * Note if d > nums.length ~= (d-n) times left rotation of array.
+ * Note if d > nums.length ~= (d%nums.length) times left rotation of array.
  * So make d = d-n;
  * 
  * Left rotate the array arr by d places.
