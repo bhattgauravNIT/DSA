@@ -1,0 +1,28 @@
+Queue is FIFO data structure which means its first in and first out.
+Ex: enque(10),enque(20),enque(30),enque(40),enque(50)
+
+So the queue will look like 
+
+10 20 30 40 50
+
+If we do getFirst opeartion on queue than we get 10 and if we do getLast opeartion of queue it will be 50.
+
+dequeue(),
+
+It will remove 10 from the queue and the queue will look like
+
+20 30 40 50
+
+Now if we do getFirst() o/p will be 20.
+
+Applications of queue:
+
+1. Queue data structure main application comes into picture when we have resource which is to be shared between multiple 
+users and this resource sharing is being done on the basic of first come and first serve basics.
+
+2. Queue data structure is also being used where there needs to be a synchronised between a slow device and a fast device.
+For ex: routers.
+
+The host which sends the data is sending it at a very fast bandwidth but lets suppose that the receiver is unable 
+to receive it at that much fast phase no we have a queue in between which stores the data coming from the host and once the
+receiver is ready to consume the data then it will be served to it.

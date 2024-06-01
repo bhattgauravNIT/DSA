@@ -9,7 +9,7 @@ Elements in a subarray must appear in the same order as they do in the original 
 For example, if you have an array [1, 2, 3, 4], then [2, 3] is a subarray, but [1, 3] is not because the elements are not contiguous in the original order.
 Subset:
 
-A subset is a collection of elements selected from a set (or an array), where the elements can be in any order, and they don't necessarily need to be contiguous.
+A subset is a collection of elements selected from a set (or an array), where the elements need to be in same order, and they don't necessarily need to be contiguous.
 Every array is a subset of itself.
 For example, if you have a set {1, 2, 3, 4}, then both {2, 3} and {1, 3} are subsets. The order of elements doesn't matter.
 In summary, the key difference lies in the arrangement of elements and the requirement for contiguity:

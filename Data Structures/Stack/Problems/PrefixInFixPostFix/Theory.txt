@@ -1,0 +1,33 @@
+Operators if placed in between of operands is termed as prefix Ex: x + y.
+
+Operators placed prior to operands is termed as inFix. Ex: +xy
+
+Operators if placed post the operands is termed as postFix. Ex: xy+.
+
+
+Operators have its own precedence/priority if if many operators have same precedence/priority then
+there lies a associativity in them that wether we need to formulate from left to right or from right to left.
+
+            Associativity
+                                                                               ^
+Ex:        Right to left                    ^/powerOperator                    |
+           Left to right                     * or /                            |   Precendence.
+           Left to right                     + or -                            |
+
+
+So power has most precedence then (* or /) and then (+ or -).
+Moreover associativity of power(^) is right to left while rest is left to right.
+
+
+Ex:       1^2^2   -> 1^4 = 1
+
+As power(^) has associativity from right to left in order to solve this we can write  1^(2^2) = 1^4 = 1.
+
+EX: 2+10*5 = 2+ (10*5) = 2+ 50 = 52
+
+Since multiplication has higher precendence than + than we evaluate multiplation first and then +.
+
+Ex: 2-1+5 = 1+5 = 6
+
+Here (- and + ) has the same precedence and thus we will now check associativity and its from left to right.
+Hence we evaluate the experession like this.
