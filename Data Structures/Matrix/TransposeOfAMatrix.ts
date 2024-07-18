@@ -20,7 +20,7 @@
  *     1 2
  */
 
-/**Approach1: 0(m*n), 0(m,n)
+/**Approach1: 0(m*n), 0(m*n)
  * 
  * So lets take an example to understand this.
  * For ex: 1  2  3  4
@@ -65,7 +65,7 @@ function transposeOfAMatrix(arr: number[][]): number[][] | null {
     return arr;
 }
 
-/**Approach2:  
+/**Approach2:  0(m*n),0(1)
  * 
  * Th problem with the above approach is that we need additional auxilary space same as that of original matrix and there are
  * in total two loops of m*n.
