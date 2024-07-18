@@ -25,24 +25,6 @@
  * o/p is 6 i,e path from 40->18 is the diameter of the binary tree.
  * 
  * 
- * 
- * function diameterOfTheBinaryTree(10) calls for left
- *                             diameterOfTheBinaryTree(20) calls for left
- *                                                diameterOfTheBinaryTree(30) calls for left
- *                                                         diameterOfTheBinaryTree(40) calls for left
- *                                                                         Left is null return 0;
- *                                                                    Left call is complete calls right
- *                                                                         Right is null return 0;
- *                                                               Both left and right call are complete max = 0,0+0+1 = 1. and returned 1.
- *                                                     Left call is complete returned 1 now calls right 
- *                                                          diameterOfTheBinaryTree(50) calls left
- *                                                                         Left is null return 0;
- *                                                                   Left call is complete calls right
- *                                                                        Right is null returns 0;
- *                                                                Both left and right call are complete max = 1,0+0+1 = 1 and return 1.
- *                                   
- * 
- * 
  */
 
 class TreeNode<T> {
@@ -56,8 +38,10 @@ class TreeNode<T> {
         this.right = right;
     }
 
-    diameterOfTheBinaryTree(root: TreeNode<T> | null) {
-        
+    diameterOfTheBinaryTree(root: TreeNode<T> | null): number {
+        if (root === null) return 0;
+        this.max = Math.max(this.max, this.diameterOfTheBinaryTree(root.left) + this.diameterOfTheBinaryTree(root.right) + 1);
+        return this.max;
     }
 }
 
