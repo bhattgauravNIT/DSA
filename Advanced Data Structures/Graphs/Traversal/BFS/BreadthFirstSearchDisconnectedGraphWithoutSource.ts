@@ -82,20 +82,15 @@ class Graph {
 
     breadthFirstSearch(source: number) {
         let q = new Queue();
-
-        if (!this.visistedList[source]) {
-            q.push(source);
-            this.visistedList[source] = true;
-        }
-
+        q.push(source);
         while (!q.isEmpty()) {
             const val = q.pop();
             if (val !== undefined) {
                 console.log(val);
-                for (let i = 0; i < this.adjacencyList[source].length; i++) {
-                    if (!this.visistedList[this.adjacencyList[source][i]]) {
-                        q.push(this.adjacencyList[source][i]);
-                        this.visistedList[this.adjacencyList[source][i]] = true;
+                for (let i = 0; i < this.adjacencyList[val].length; i++) {
+                    if (!this.visistedList[this.adjacencyList[val][i]]) {
+                        q.push(this.adjacencyList[val][i]);
+                        this.visistedList[this.adjacencyList[val][i]] = true;
                     }
                 }
             }
@@ -132,7 +127,10 @@ class Graph {
     */
     breadthFirstSearchDisconnected() {
         for (let i = 0; i < this.adjacencyList.length; i++) {
-            this.breadthFirstSearch(i);
+            if (!this.visistedList[i]) {
+                this.visistedList[i] = true;
+                this.breadthFirstSearch(i);
+            }
         }
     }
 }

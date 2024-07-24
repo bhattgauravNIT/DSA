@@ -1,5 +1,6 @@
 /**Given an undeirected and possibly disconnected graph, the task is to find all the total connected components
- * in the graph.
+ * in the graph. This problem is also famous as island problem of graph in which we need to find the total
+ * connected islands.
  * 
  * Ex:                          0                             4                               7------8
  *                                                      |             |            
@@ -73,9 +74,43 @@ class Graph {
         this.adjacencyList[node1].push(node2);
         this.adjacencyList[node2].push(node1);
     }
+
+    breadthFirstSearch(source: number) {
+        let q = new Queue();
+        q.push(source);
+        while (!q.isEmpty()) {
+            const val = q.pop();
+            if (val !== undefined) {
+                for (let i = 0; i < this.adjacencyList[val].length; i++) {
+                    if (!this.visitedNodes[this.adjacencyList[val][i]]) {
+                        q.push(this.adjacencyList[val][i]);
+                        this.visitedNodes[this.adjacencyList[val][i]] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    /**The approach is simple as that as BFS, we will be having a vistsedArray which will be initialized
+     * to false for all the vertex , now since there is no source vertex so every vertex has to be considered
+     * as source and in case its not visited then we will be doing a breadth first search of it using the adjacency list
+     * which we have maintained and everytime we call for this breadth first seach function we will increment the
+     * counter stating that here we are dealing with a new connected portion of the graph which has not been visited yet.
+     */
+    breadthFirstSearchDisconnected() {
+        let totalConnectedComponents = 0;
+        for (let i = 0; i < this.adjacencyList.length; i++) {
+            if (!this.visitedNodes[i]) {
+                this.visitedNodes[i] = true;
+                this.breadthFirstSearch(i);
+                totalConnectedComponents++;
+            }
+        }
+        return totalConnectedComponents;
+    }
 }
 
-let g = new Graph(7);
+let g = new Graph(9);
 g.setAdjacencyList(0, 1);
 g.setAdjacencyList(0, 2);
 g.setAdjacencyList(1, 3);
