@@ -55,7 +55,8 @@ class Graph {
      * BFS and dfs can be a little confusion but if we go back to basic statment than we can we understand bfs and dfs.
      * 
      * BFS for a source is simply first get me all the immediate connected neighbours of the source
-     *  then give me all immediate connected neighbour of neighbour and so on.
+     *  then give me all immediate connected neighbour of neighbour and so on or in BFS we we vist all adjacents first
+     * then visit their adjacents and then their adjacents and so on using queue datastructure.
      * 
      * However DFS is first give me a connected neighbour of the source then neighbour of this connected neighbour and so
      * on.
@@ -80,7 +81,8 @@ class Graph {
      * BFS for the above graph:  0 1 2 3 4
      * 
      * Now lets talk about DFS of this graph so DFs is first give me a connected neighbour of the source then
-     * neighbour of this connected neighbour and so on.
+     * neighbour of this connected neighbour and so on or in dfs we go to next adjacent and then recursively call
+     * for all connected vertex of this adjacent once that is done then we go to the next adjacent.
      * 
      * So for source 0 its immediate connected neigbours are 1 & 2, since generally we take lesser value as priority
      * so 0 1 
