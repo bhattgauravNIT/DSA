@@ -334,6 +334,29 @@
             If the inbound vertex count is > 0, reduce by 0
             if its zero then push to queue
 
+      **DFS**
+
+            **Algo:**
+
+            Once all the dependices or dependents vertex are pushed to stack then only push the independent vertex.
+            Use recursion to achieve this, since stack is last in first out so all the independent vertex will be 
+            printed first and then the dependents. 
+
+            Maintain a stack, visited boolean array
+            Iterate over every vertex say 0->v
+            if vertex is not visited call DFS recur with ith vertex
+
+            DfsRecur with ith vertex called
+            mark the vertex as visited, 
+            Traverse over the adjacency list of the vertex
+            If the neighbor or adjacent node obtained is not visited
+            call dfsRecur on that node.
+
+            Once the call stack finishes for any jth call, push vertex to stack
+
+            Once all the main iteration from 0->v is finished
+            print the stack.
+
 
 5. **Shortest path:**
       **Undirected Graph:**
@@ -363,6 +386,48 @@
           mark it as visited
           push to queue
           Mark the dist array of the neighbour as +1 to that of the current vertex whose adjacency list we are iterating.
+
+
+
+      **Directed Graph:**
+
+      **Prob:**
+           Given an directed graph with weights and a source the task is to find the shortest distance for all the vertex from this
+           source.
+
+      **Intution:**
+           We will do a toplogical sorting of the directed graph this will help us in attaing a toplogical sorted array
+            or sequence of vertex in which all dependicies will be sorted so anything which has dependecny will pe present
+            after the main vertex is processed or we will be getting a pattern in which a node 1 if present before
+            node2 will resemble that node 2 is reaching from node1.
+
+            Now to this topological sorted list we will iterate over every index and for that vertex we will traverse over the
+            adjacency list.
+
+            We will have a dist[] which will be Infinite for all and 0 for source.
+
+            If 
+
+            dist[neighbour] > dist[currentVertex]+ weight(currentVertex,neighbour) we will update
+
+            dist[neighbour] = dist[currentVertex]+ weight(currentVertex,neighbour) 
+
+      **Algo:**
+          The main method will fisrt call a method whcih will provide the topologocal sortred pattern of
+          the graph.
+          Topological sorting can be attained via BFS or DFS.
+
+          Now we traverse through the toplogical sorted array and 
+          currentvertex = topological[i] ;
+
+          Now we will traverse over adjacencyList of currentVertex.
+          adjacents  = adjacencyList[currentVertex]
+          for(adjacent of adjacents)
+          if(dist[neighbour] > dist[currentVertex]+ weight(currentVertex,neighbour) we will update
+           dist[neighbour] = dist[currentVertex]+ weight(currentVertex,neighbour) 
+
+           dist is the answer.
+)
 
       
           
