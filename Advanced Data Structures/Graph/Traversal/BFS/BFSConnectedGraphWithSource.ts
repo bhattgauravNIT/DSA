@@ -106,13 +106,13 @@ class Graph<T extends number> {
         }
     }
 
-    /**Approach: 0(v),0(v) 
+    /**Approach: 0(v+E),0(v) 
      * 
      * The approach to solve the problem is somewhat similar to level order traversal of a tree.
      * SO what we do here 
      * 
      * we will be having a queue and a vistedArray of size equal to the numberOfVertex of the graph.
-     * Initialize the visted array as false initially for all the vertex.Now to this queue insert the root node from where
+     * Initialize the visted array as false initially for all the vertex. Now to this queue insert the root node from where
      * we need to start the traversal of the graph.
      * 
      * check if the queue is not empty and simply for that val at top of the queue, log it and pop it and insert the
@@ -127,12 +127,11 @@ class Graph<T extends number> {
      * 
      * Analysis of time and space complexity.
      * 
-     * Since we are iterating over the queue all the vertex for once will always be pushed into the queue thus
-     * the time compelxitry of the breadth first search is simply 0(n).
+     *  Since we are iterating over all the adjacency list for every vertex thus there are v vertex and the length of the
+     * adjacency list for any ith vertex can be E where E is the number of edges of that vertex thus
+     * the time complexity is 0(V+E). 
      * 
-     * The max number of vertex which can be present in queue at a specif time will be the max number of
-     * edges corresponding to any vertex and in worst case it can be 0(v-1) !~ 0(v) where v is the total vertex of the
-     * graph.
+     * The queue will be containing v vertex which is equal to the space complecity of DFS.
     */
     breadthFirstSearch(node1: T) {
         let q = new Queue<T>();

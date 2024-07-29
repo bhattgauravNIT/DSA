@@ -113,20 +113,22 @@ class Graph {
  * Source node is 0.
  * 
  * We will be using BFS traversal and will be maintaining a dist array,
- * Initially the dist array will be set with Value Number_MAX_INTEGER.
+ * Initially the dist array will be set with Value Number_MAX_INTEGER apart from the source which will be set as 0 value only
+ * beacuse say source is 0, so to reach 0 from 0 we dont need any edge.
+ * 
  * Now as in simple BFS
  * 
  * once function is called we will be pushing the source in a queue and will mark it as visisted .
  * Now while the q is not empty we will traverse through the adjacencyList of the val which is being pooped out from the 
  * queue.
- * If this val is not visisted then simply we will push this to queue mark it as vsisited and willupdate the dist array
- * for that iteration of adjacency list element with value of the vertex whose adjacency list we are itearting+1.
+ * If this val is not visisted then simply we will push this to queue mark it as visited and will update the dist array
+ * for that iteration of adjacency list element with value of the vertex whose adjacency list we are itearting + 1.
  * 
  * In this way we will get to know the shortest dist of all the vertex.
  *  
      */
     shortestPathFromSource(source: number): number[] {
-        this.dist[source] = source;
+        this.dist[source] = 0;
         this.visistedVertex[source] = true;
         let q = new Queue();
         q.push(source);

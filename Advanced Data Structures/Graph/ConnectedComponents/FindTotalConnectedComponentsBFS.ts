@@ -1,4 +1,4 @@
-/**Given an undeirected and possibly disconnected graph, the task is to find all the total connected components
+/**Given an undirected and possibly disconnected graph, the task is to find all the total connected components
  * in the graph. This problem is also famous as island problem of graph in which we need to find the total
  * connected islands.
  * 

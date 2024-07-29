@@ -123,7 +123,7 @@ class Graph {
      * The timeconplexity will simply be 0(v+E) because we are looping over all the vertex of the graph and for each 
      * vertex in worst case we can iterate over all of its edges present in adjacency list.
      * 
-     * The size of the queue in worst case can be equal to (v-1) ~= v where v is the number of vertex of the graph.
+     * The size of the queue in worst case can be equal to  v where v is the number of vertex of the graph.
     */
     breadthFirstSearchDisconnected() {
         for (let i = 0; i < this.adjacencyList.length; i++) {

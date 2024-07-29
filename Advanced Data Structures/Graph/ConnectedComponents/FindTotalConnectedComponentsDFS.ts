@@ -35,28 +35,40 @@ class Graph {
         this.adjacencyList[node2].push(node1);
     }
 
-    dfsRecurision(eachNode: number) {
-        this.visitedList[eachNode] = true;
-        for (let i = 0; i < this.adjacencyList[eachNode].length; i++) {
-            const neighbour = this.adjacencyList[eachNode][i];
-            if (!this.visitedList[neighbour]) {
-                this.dfsRecurision(neighbour);
+    depthFirstSearch(vertex: number) {
+        let stack: number[] = [];
+        stack.push(vertex);
+        this.visitedList[vertex] = true;
+
+        while (stack.length > 0) {
+            let val = stack.pop();
+            if (val !== undefined) {
+                for (let i = 0; i < this.adjacencyList[val].length; i++) {
+                    let neighbour = this.adjacencyList[val][i];
+                    if (!this.visitedList[neighbour]) {
+                        stack.push(neighbour);
+                        this.visitedList[neighbour] = true;
+                    }
+                }
             }
         }
     }
 
-    /**So simply while iterating over all the vertex, since if a vertex is not visited
-     * then we call dfsRecurision onto that vertex which inturns visits all nodes connected
-     * to it , so when we come back from dfsRecurision function and for those vertex which didn't got
+    /**
+     * Approach: 0(v+e), 0(v)
+     * 
+     * So simply while iterating over all the vertex, since if a vertex is not visited
+     * then we call depthFirstSearch onto that vertex which inturns visits all nodes connected
+     * to it , so when we come back from depthFirstSearch function and for those vertex which didn't got
      * visited from the previous call will conribute in identification of a new component.
-     * Thus we can get the total non connectec components of the graph.
+     * Thus we can get the total non connectecd components of the graph.
      */
     dfsMain(): number {
         let cnt = 0;
-        for (let i = 0; i < this.vertex; i++) { 
+        for (let i = 0; i < this.vertex; i++) {
             if (!this.visitedList[i]) {
                 cnt++;
-                this.dfsRecurision(i);
+                this.depthFirstSearch(i);
             }
         }
         return cnt;
