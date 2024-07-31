@@ -357,8 +357,10 @@
             Once all the main iteration from 0->v is finished
             print the stack.
 
+5. **Minimum Spanning:**
 
-5. **Shortest path:**
+
+6. **Shortest path:**
       **Undirected Graph:**
 
       **Prob:**
@@ -385,7 +387,7 @@
           If not visisted 
           mark it as visited
           push to queue
-          Mark the dist array of the neighbour as +1 to that of the current vertex whose adjacency list we are iterating.
+          Mark the dist array of the neighbour as + 1 to that of the current vertex whose adjacency list we are iterating.
 
 
 
@@ -423,11 +425,11 @@
           Now we will traverse over adjacencyList of currentVertex.
           adjacents  = adjacencyList[currentVertex]
           for(adjacent of adjacents)
-          if(dist[neighbour] > dist[currentVertex]+ weight(currentVertex,neighbour) we will update
+          if(dist[neighbour] > dist[currentVertex]+ weight(currentVertex,neighbour)) we will update
            dist[neighbour] = dist[currentVertex]+ weight(currentVertex,neighbour) 
 
            dist is the answer.
-)
+
 
       
           
