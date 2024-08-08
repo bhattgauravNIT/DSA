@@ -1,11 +1,22 @@
-/**A priority queue is exactly similar to heap datastructure. It uses the concept of heaps only,
- * infact if we need to differenetiate that we can say that heap is a concept and priorty queue is a datastructre which
- * uses the conecpt of heap.
+/**Given a input array and a value k, any index value in the given array can be placed from i=i-k to i=i+k provided
+ * i-k >=0 and i+k <= arr.length-1.
  * 
- * The task it to create a priority queue lest say a min priority queue and implemnt functions like
- * build this priority queue, top, pop, size, isEmpty().
- */
+ * The task is to correctly sort the array.
+ * 
+ * Ex: arr = [9,8,7,18,19,17]
+ *     k = 2
+ * 
+ * o/p : [7,8,9,17,18,19]
+ * 
+  */
 
+/**Approach: 0(nlogn),0(1) */
+function sortKSortedArray(arr: number[], k: number): number[] {
+    return arr.sort((a, b) => a - b);
+}
+
+
+/**Approach2:  */
 class PriorityQueue<T> {
     private arr: T[];
     constructor() {
@@ -88,11 +99,24 @@ class PriorityQueue<T> {
     }
 }
 
-let pq = new PriorityQueue<number>();
-pq.add(10);
-pq.add(20);
-pq.add(15);
-pq.add(2);
-console.log(pq.peek());
-console.log(pq.pop());
-console.log(pq.peek());
+function sortKSortedArray1(arr: number[], k: number): number[] {
+    let pq = new PriorityQueue<number>();
+    let index = 0;
+    for (let i = 0; i <= k; i++) {
+        pq.add(arr[i]);
+    }
+    for (let i = k + 1; i < arr.length; i++) {
+        const val = pq.pop();
+        if (val !== undefined) {
+            arr[index++] = val;
+            pq.add(arr[i]);
+        }
+    }
+    while (!pq.isEmpty()) {
+        const val = pq.pop();
+        if (val !== undefined) {
+            arr[index++] = val;
+        }
+    }
+    return arr;
+}

@@ -1,4 +1,4 @@
-/**Merge sort algo give time complexity 0(nlog(n)) and use aucilary space due to call stack as well as merge function 
+/**Merge sort algo give time complexity 0(nlog(n)) and use auxilary space due to call stack as well as merge function 
  * therefore it uses a sapce of 0(n), however its an stable sorting algo.
  * 
  * MergeSort is based on divide and conqur algo.
