@@ -11,10 +11,19 @@
  */
 
 /**
- * Approach1: 0(n*Klog(n*k)), 0(n*k)
+ * Approach1: 0((n*K) log(n*k)), 0(n*k)
  * 
- * where n is the max number of elements is the array or the max length of the inner array present in main array and
- * k is the length of the mainArray.
+ * where n is the  total number of elements is the array
+ * k is the total number of rows in the input array.
+ * 
+ * Simply first iterate over the entire input matrix and place them in a array.
+ * Now sort this array.
+ * 
+ * Time complexity analysis.
+ * The arr formed after traversal of the entire matrix is n*k and sorting of a arr with size n*k is log(n*k).
+ * So overall its n*k * (logn*k)
+ * 
+ * The additional space required will be o(n*k).
 */
 function mergeKSortedArray(arr) {
     let res: number[] = [];
@@ -26,8 +35,51 @@ function mergeKSortedArray(arr) {
     return res.sort((a, b) => a - b);
 }
 
-/**Approach2:
+/**Approach2: 
  * 
+ * This approach will be to use a priorityy queue.
+ * 
+ * So our priority queue will be a array of object where object will be having properties like
+ * value, rowIndex , columnIndex.
+ * 
+ * i,e  res: Array<{ value: number, rowIndex: number, columnIndex: number }>;
+ * 
+ * Lets suppose we have an input array as 
+ * arr = [
+ *             [10,20,30],
+ *             [5,15],
+ *             [1,9,11,18]
+ *            ]
+ * 
+ * So we itearte over the length of this array and will place the 0th column index of every queue in a min priority queue.
+ * So initially our priority queue will look like:
+ * 
+ *                                 [1,2,0]
+ *                    [10,0,0]                 [5,1,0]
+ * 
+ * where ex: [1,2,0] resemble value present at 2nd row 0th column is 1.
+ * 
+ * Now interally we are using a minHeap for implementation of a priority queue.
+ * Now while the priority queue is not empty we went inside a loop i,e
+ * 
+ *            while (!pq.isEmpty()) 
+ * 
+ * We remove the top element ie, [1,2,0] gets removed .We push this value to a res array. res = [1]
+ * Now we will insert the next column index of the same row in the minHeap or say the priority queue.
+ * So our priority queue will look like:
+ *                                        
+ *                                [5,1,0]
+ *                    [10,0,0]                 [9,2,1]
+ * 
+ * We repeat the same preocess and the res in last will be containing the sorted list of all the k sorted array.
+ *          
+ * Time complexity analysis:
+ * 
+ * 1) Insert first element of all k rows in the priority queue min heap ie, k(logk).
+ * 2) There are n elements in total in the input array so every element is inserted exactly once in priority queue and also
+ *  extracted once from priority queue. So n*log(k).
+ * 
+ * So klogk + nlogk.            
  */
 
 class PriorityQueue {

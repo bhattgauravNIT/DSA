@@ -3,6 +3,12 @@
  * 
  * The task is to correctly sort the array.
  * 
+ *  A k sorted array is a array in which a element is atmost k position away from its actual targeted value.
+    Ex: arr = [9,8,7,18,19,17], k =2
+    So the actual sorted array is [7,8,9,17,18,19]
+    If we look at 7 then actually its at index 2 and its ideal position is 0, i,e its k position
+    deviated away from its actual target position.
+ * 
  * Ex: arr = [9,8,7,18,19,17]
  *     k = 2
  * 
@@ -16,7 +22,46 @@ function sortKSortedArray(arr: number[], k: number): number[] {
 }
 
 
-/**Approach2:  */
+/**Approach2: 
+ * 
+ * Lets understand this with the help of an example.
+ * arr = [9,8,7,18,19,17] and k=2.
+ * 
+ * So constraint is at this array is being formed in such a way that
+ *  any given index can be placed anywhere from i=i-k to i=i+k to make this array sorted.
+ * 
+ * We need to sort this array.
+ * 
+ * So we will be using a priority queue which will have an internal implementation of a minHeap.
+ * 
+ * First place k elements in the priority queue.
+ * 
+ * So the minHeap looks like: [9,8,7,18,19,17] where k elements are 9,8
+ * 
+ *                      8
+ *               9
+ * 
+ * Now we itearte over k+1 elements till the last element in the array.
+ * First we pop from the priority queue.
+ * 
+ * 8.
+ * 
+ * Now we initiate a index = 0.
+ * And place this popped item in index. ie, arr[0] = 8.
+ * Now we place ith element in the pQ.
+ * and increment index.
+ * 
+ * So arr = [8,8,7,18,19,17]
+ * heap looks like:
+ * 
+ *                     7
+ *               9
+ * 
+ * 
+ * and so on.... 
+ * 
+ *                      
+ */
 class PriorityQueue<T> {
     private arr: T[];
     constructor() {

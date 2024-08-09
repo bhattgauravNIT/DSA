@@ -1,4 +1,4 @@
-/**Given a array arr and a value k, the task is to print k largest elements of this array
+/**Given a array arr and a value k, the task is to print total k largest elements of this array
  * 
  * EX: I/p = [5,15,10,20,8]
  *     k = 2   
@@ -9,7 +9,23 @@
  *    o/p : 8,9,10
  */
 
-/**Approach1: 0(nlogn),0(1) */
+/**Approach1: 0(nlogn)+ 0(k),0(1)
+ * 
+ * This approach is based on the case that we simply sort the array ex: i/p array is 
+ * [5,15,10,20,8]
+ * 
+ * So we sort the array so it becomes:
+ * 
+ *   [20,15,10,8,5]
+ * 
+ * So k=2 largest elements will simply be 20 and 15 .
+ * 
+ *  Now the total k largest elements in the array will simply be  20.15.
+ * 
+ * Time complexity analysis:
+ * 1) Sort the array: n*log(n).
+ * 2) Iterate over k elements of the sorted array 0(k).
+ */
 function kLargestElements(arr: number[], k: number): number[] {
     let res: number[] = [];
     arr = arr.sort((a, b) => a - b);
@@ -23,9 +39,37 @@ function kLargestElements(arr: number[], k: number): number[] {
 
 /**
  * Approach2:
- *               10
- *           9        8
- *       4       6
+ *         
+ * Lets understand this with the help of an example:
+ * I/p = [5,15,10,20,8]
+ *     k = 2   
+ * 
+ * We will be creating a priority queue which internally will be a maxHeap so the maxHeap will look like:
+ * 
+ *                          20
+ *                     15       10
+ *                8       5
+ * 
+ * Now we keep poping from the priority queue till we have poped k elements.
+ * 
+ * Time complexity:
+ * 
+ *     First we will create a max heap from the input array.
+ *     In oder to create a max heap we will find the lastInnerParent ie, if we look at binary tree representation of [5,15,10,20,8]
+ *     it will be something like:
+ *                                               5
+ *                                      15                10
+ *                               20          8 
+ * 
+ * Last innerParentNode is at index 2 i,e 10.
+ * So we suspect this as the node which is disobeying the property of maxHeap and then once its sorted then we call for index 1 
+ * and then index 0.
+ * 
+ * So we can say some n nodes  are calling maxHeapify i,e n*log(n).
+ * 
+ * Now we extract k elements from the maxHeap i,e klog(k).
+ * 
+ * So time complexity is n*log(n)+ klog(k). 
  */
 
 class PriorityQueue {
