@@ -12,7 +12,7 @@ root value, left value, right value
 
 Now these three are madatory in order to correctly traverse through the tree however these three can be done in 3! ways
 
-like say left first -> root -> right 
+like say left -> root -> right 
 or     right-> left->root
 or left->right->root 
 

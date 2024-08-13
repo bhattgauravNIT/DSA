@@ -66,7 +66,7 @@ class Queue<T> {
 
 class TreeNode<T> {
     data: number;
-    left: TreeNode<T> | null;    // 10, null, 20,30
+    left: TreeNode<T> | null;
     right: TreeNode<T> | null;
     maxLevel: number;
     constructor(data: number, left: TreeNode<T> | null = null, right: TreeNode<T> | null = null) {
@@ -83,20 +83,21 @@ class TreeNode<T> {
      * the first node of it.
      */
     leftViewOfBinaryTree(root: TreeNode<T> | null): void {
-        let q = new Queue<TreeNode<T> | null>();
+        if (root === null) return;
+        let q = new Queue<TreeNode<T>>();
         q.enqueue(root);
         while (!q.isEmpty()) {
-            let size = q.getSize();
-            for (let i = 0; i < size; i++) {
+            let s = q.getSize();
+            for (let i = 0; i < s; i++) {
                 if (i === 0) {
                     console.log(q.getFront()?.data);
                 }
-                let val = q.dequeue();
-                if (val?.left) {
-                    q.enqueue(val.left);
+                let cNode = q.dequeue();
+                if (cNode && cNode.left) {
+                    q.enqueue(cNode.left);
                 }
-                if (val?.right) {
-                    q.enqueue(val.right);
+                if (cNode && cNode.right) {
+                    q.enqueue(cNode.right);
                 }
             }
         }
@@ -124,7 +125,7 @@ class TreeNode<T> {
  * 
  * 10 gets printed.
  * 
- * Now    leftViewOfBinaryTree1(10)     , Maxlevel = 0, level = 1. 10 gets printed calls for left subTree
+ * Now    leftViewOfBinaryTree1(10)     , Maxlevel = 0, level = 1. 10 gets printed and maxLevel is set to level now calls for left subTree
  *                       leftViewOfBinaryTree1(20), MaxLevel = 1, level=2, 20 gets printed calls for leftSubTree
  *                              leftViewOfBinaryTree1(40), MaxLevel = 2, level = 3, 40 gets printed calls for left.
  *                                                         Maxlevel becomes 3, level = 3
@@ -167,5 +168,4 @@ root.left.left = new TreeNode(40);
 root.left.right = new TreeNode(50);
 root.right.right = new TreeNode(60);
 root.leftViewOfBinaryTree(root);
-root.leftViewOfBinaryTree1(root, 1);
-
+// root.leftViewOfBinaryTree1(root, 1);

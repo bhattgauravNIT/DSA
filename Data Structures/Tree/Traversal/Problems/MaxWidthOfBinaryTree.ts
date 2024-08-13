@@ -14,9 +14,9 @@
  */
 class Queue<T> {
     arr: T[] | undefined[];
-    front: number;                    
+    front: number;
     rear: number;
-    size: number;               
+    size: number;
     capacity: number;
     constructor(capacity: number = 100) {
         this.arr = new Array(capacity).fill(undefined);
@@ -74,32 +74,31 @@ class TreeNode<T> {
         this.right = right;
         this.maxLevel = 0;
     }
-
     /**Approach: 0(n),0(width of binary tree)| 0(n)
-     * 
-     * The idea is simple in level order traversal or say breadth first traversal at any point of time
-     * while we traverse level by level in a queue. The max size of the queue at any particular level
-     * is the width of the binary tree.
-     */
+      * 
+      * The idea is simple in level order traversal or say breadth first traversal at any point of time
+      * while we traverse level by level in a queue. The max size of the queue at any particular level
+      * is the width of the binary tree.
+      */
     maxWidthOfBinaryTree(root: TreeNode<T> | null): number {
         if (root === null) return 0;
-        let q = new Queue<TreeNode<T> | null>();
+        let q = new Queue<TreeNode<T>>();
+        let max = Number.MIN_SAFE_INTEGER;
         q.enqueue(root);
-        let res = 0;
         while (!q.isEmpty()) {
             let s = q.getSize();
-            res = Math.max(s, res);
+            max = Math.max(s, max);
             for (let i = 0; i < s; i++) {
                 let val = q.dequeue();
-                if (val?.left) {
+                if (val && val.left) {
                     q.enqueue(val.left);
                 }
-                if (val?.right) {
+                if (val && val.right) {
                     q.enqueue(val.right);
                 }
             }
         }
-        return res;
+        return max;
     }
 }
 

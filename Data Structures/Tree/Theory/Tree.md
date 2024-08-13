@@ -24,6 +24,7 @@ Subtree: So the root node as two subTrees one on left which is 20,40 & 50 . One 
 Descendants: Descendants is termed as all the nodes which lie in the subtree with this node as the root.
                 Ex: if we want to get Descendants of 20 , so it will be all the nodes in the subtree which has 20 as the root.
                 So Descendants of 20 are 40 and 50.
+                eX: Descendants of 10 is everything below it.
 
 Ancestors: So 40 is the child of 20 and 20 is the child of 10 so ultimately 40 is the grandchild of 10. Such hierarchical format
            is termed as Ancestors.
@@ -38,3 +39,10 @@ Some applications of tree datastructure are
 2: Folder structure
 
 etc.
+
+
+A binary tree is considered as a tree which has atmost 2 nodes i,e it can either has 0 node or 1 node or 2 node.
+
+Ex:                                      10
+                                     2        3
+                                4          7    8

@@ -1,4 +1,4 @@
-/**Inorder traversal is a popular depth first tree travesal permutation in which we follow order of
+/**Inorder traversal is a popular depth first tree traversal permutation in which we follow order of
  * left -> root -> right.
  * 
  * For ex:                     10
@@ -10,26 +10,26 @@
  * So the inorder traversal of this tree will be 
  * o/p 20,10,40,30,50
  * 
- * 
  */
+
+
 
 /**Approach: 0(n),0(heightOfBinaryTree) where n is the number of nodes in the tree.
  * 
- * Height of binary tree is the number of nodes from root to leaf.
- * Atmost in the function call stack we will have either the left function calls or the right function calls
+ * Height of binary tree is the number of nodes from root to leaf on the longest path.
+ * At most in the function call stack we will have either the left function calls or the right function calls
  * thus its 0(heightOfBinaryTree).
  * 
  * This will get clear in explanation below.
  * 
- * 
- * In our approach instead of simply priniting the tree data in inorder fashion we are stroing it a array and then
+ * In our approach instead of simply printing the tree data in inorder fashion we are storing it a array and then
  * returning back this array. We could having simply printed as well via code 
  * 
  * inorderTraversal(root: TreeNode<T> | null): void {
         if (root === null) return;
         this.inorderTraversal(root.left);
         console.log(root.data);
-        this.inorderTraversal(root.right, arr);
+        this.inorderTraversal(root.right);
     }
 
     Now lets understand the above simpler recursion first than we will understand how we can store them in a array and
@@ -43,12 +43,12 @@
  *                             40         50
  * 
  * 
- * First we have passed the root in inorderFucntion so root is 10, now in first line it calls for inoder again but with
+ * First we have passed the root in inorderFunction so root is 10, now in first line it calls for inorder again but with
  * root.left so in call stack root which is 10 node gets stored so stack looks like 
  * 
- * inoderder(10)
+ * inorder(10)
  * 
- * Now at 20 node as inoder function is being called so again it calls for root.left and thus now the function control is 
+ * Now at 20 node as inorder function is being called so again it calls for root.left and thus now the function control is 
  * getting away from 20 so this node gets stored in function call stack. Now stack looks like
  * 
  * 20(node)
@@ -62,7 +62,7 @@
     o/p ~~~~~~~~~~~~~~20
 
     and call for 20-> right 
-    Its again null thus returns and now inoder(20) function has completed all its task thus gets removed from stack.
+    Its again null thus returns and now inorder(20) function has completed all its task thus gets removed from stack.
 
     So stack looks like 
 
@@ -72,48 +72,48 @@
 
     Now calls for right task.
 
-    So inorder(30) now inoderOrder(30) again calls for inoder(30->left) thus control is getting away from
-    30 and thus it gets storted in stack.
+    So inorder(30) now inOrder(30) again calls for inOrder(30->left) thus control is getting away from
+    30 and thus it gets stored in stack.
 
 
-    inoder(30)
-    inoder(10)
+    inOrder(30)
+    inOrder(10)
 
-    Now inoder(30) again calls for left of it.i,e inorder (40).
+    Now inOrder(30) again calls for left of it.i,e inorder (40).
     Inorder 40 now calls left of it again so control is getting away so it gets stored in stack.
 
 
     inorder(40)
-    inoder(30)
-    inoder(10)
+    inOrder(30)
+    inOrder(10)
 
-    Now inoder(40) calls for left of it which is null and thus returns.
+    Now inOrder(40) calls for left of it which is null and thus returns.
     Now it prints 40 as all left calls are completed
 
     O/p ~~~~~~ 20,10,40 Till now
 
-    And goes to right of it which is again null and thus inoder(40) call gets completed and it
+    And goes to right of it which is again null and thus inOrder(40) call gets completed and it
     gets removed from stack.
 
-    inoder(30)
-    inoder(10)
+    inOrder(30)
+    inOrder(10)
 
-    Now all left call of inoder(30) is completed so it prints itself 
+    Now all left call of inOrder(30) is completed so it prints itself 
     
     O/p ~~~~~~ 20,10,40,30 Till now
 
     and calls right,
 
-    Inoder(50). Now inorder 50 calls for left of it now again pointer is getting removed from inoder(50) so it
+    inOrder(50). Now inorder 50 calls for left of it now again pointer is getting removed from inOrder(50) so it
     gets stacked
 
 
     inorder(50)
-    inoder(30)
-    inoder(10)
+    inOrder(30)
+    inOrder(10)
 
     Now 50 calls left of it which is null.
-    Now all left calls of inoder(50) is complete so it prints itself 
+    Now all left calls of inOrder(50) is complete so it prints itself 
     
    O/p ~~~~~~ 20,10,40,30 ,50
 
@@ -123,13 +123,13 @@
     All calls of 30 are complete so it gets removed from stack.
     All calls of 10 are complete so it gets removed from stack.
 
-    In case of storing in array we simply need to pass an array paramter to function.
+    In case of storing in array we simply need to pass an array parameter to function.
     This array will store in place of logging and will be send in every recursive call to the
     function itself .
 
     In last when everything is over we return the arr.
 
-    We can clearly see that atmost 3 items were there at a time in function call stack which
+    We can clearly see that at most 3 items were there at a time in function call stack which
     are either the left parts or the right parts.
  * 
  */

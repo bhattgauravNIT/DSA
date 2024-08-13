@@ -84,19 +84,20 @@ class TreeNode<T> {
      * 
      * We repeat the process and retun this res.
      */
+
     sizeOfBinaryTree(root: TreeNode<T> | null): number {
         if (root === null) return 0;
-        let res = 0;
-        let q = new Queue<TreeNode<T> | null>
+        let q = new Queue<TreeNode<T>>();
         q.enqueue(root);
+        let res = 0;
         while (!q.isEmpty()) {
-            let val = q.dequeue();
+            let cNode = q.dequeue();
             res++;
-            if (val?.left) {
-                q.enqueue(val.left);
+            if (cNode && cNode.left) {
+                q.enqueue(cNode.left);
             }
-            if (val?.right) {
-                q.enqueue(val.right);
+            if (cNode && cNode.right) {
+                q.enqueue(cNode.right);
             }
         }
         return res;
@@ -151,4 +152,4 @@ root.left = new TreeNode(80);
 root.right = new TreeNode(70);
 root.left.left = new TreeNode(30);
 root.left.right = new TreeNode(40);
-console.log(root.sizeOfBinaryTree1(root));
+console.log(root.sizeOfBinaryTree(root));
