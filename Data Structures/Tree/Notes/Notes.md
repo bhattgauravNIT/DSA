@@ -114,6 +114,16 @@ _Tree Traversal_:
                 let rightHeight = recursivelyCall the function itself with root.right
                 return Max(leftHeight,rightHeight)+1.
 
+             **Note**
+                We some times may need to store heights of every node for preComputation and thus we simply
+                say using a map of treeNode and number so we can do this using above logic only.
+                
+                if(root === null) return 0;
+                let leftHeight = recursivelyCall the function itself with root.left
+                let rightHeight = recursivelyCall the function itself with root.right
+                let height = Max(leftHeight,rightHeight)+1;
+                mp.set(root,height);
+                return height;
 
 
 
@@ -492,3 +502,13 @@ _Tree Traversal_:
                   make stack2.length empty
                   }
                   }
+
+
+
+**11. Diameter of a binary tree:**
+
+
+**12. Find path of a node from root:**
+
+
+**12. Lowest common ancestor:**
