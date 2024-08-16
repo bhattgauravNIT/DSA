@@ -508,7 +508,33 @@ _Tree Traversal_:
 **11. Diameter of a binary tree:**
 
 
+
+
 **12. Find path of a node from root:**
 
 
+
+
 **12. Lowest common ancestor:**
+
+  **Approach1**
+
+  **Approach2**
+
+
+
+
+**13. Burn a binary tree:**
+
+
+
+**14. Total nodes in a complete binary tree:**
+
+
+
+
+**15. Serialize & Deserialize a binary tree:**
+
+  **Approach1:**
+
+   **Approach2:**

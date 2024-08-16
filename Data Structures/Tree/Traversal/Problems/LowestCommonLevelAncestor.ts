@@ -77,8 +77,8 @@ class TreeNode<T> {
  * 
  * n1 = 30,n2 = 80
  * 
- *   In this approach we will be creating two path Arrays one for the targetNode1 and other for the targetNode2.
- *   So lets for now suppose we somehow make pathArray for targetNode 30.
+ *    In this approach we will be creating two path Arrays one for the targetNode1 and other for the targetNode2.
+ *    So lets for now suppose we somehow make pathArray for targetNode 30.
  * 
  *    pathArray1 = [10,50,20,90,30] it will somewhat look like this.
  * 
@@ -89,10 +89,10 @@ class TreeNode<T> {
  *    for the targetNodes.
  *    i,e
  *      
- *     [10,50,20,90,30]
- *     [10,50,20,80]
+ *    [10,50,20,90,30]
+ *    [10,50,20,80]
  *     
- *     Clearly both starts differing from node 20 so node 20 is the result.
+ *    Clearly both starts differing from node 20 so node 20 is the result.
  * 
  *    Lets talk about how we can find pathArr for targetNodes.
  * 
@@ -152,7 +152,12 @@ class TreeNode<T> {
  * 
  *     In the same way the path gets prepared and becomes [10,50,20,90]
  * 
+ *    Now we we get the path for two target nodes i,e
+ *    [10,50,20,90,30]
+ *    [10,50,20,80]
  * 
+ *    Now we need to find the node after which the paths are getting differ so for that use two pointers
+ *    and get the different node.
  * 
  * */
     lowestLevelCommonAncestor(root: TreeNode<T> | null, targetNode1: TreeNode<T> | null, targetNode2: TreeNode<T> | null) {
@@ -170,7 +175,99 @@ class TreeNode<T> {
                 break;
             }
         }
-        return this.path1[i-1].data
+        return this.path1[i - 1].data
+    }
+
+    /**Approach2: 0(n),0(h)
+     * 
+     * For ex:                       10
+ *                      |                   |
+ *                     50                   60
+ *                   |      |
+ *                  70      20
+ *                |        |   |
+ *               40      90    80
+ *                      |
+ *                      30
+ * 
+ *    i/p: n1 = 30,n2 = 80
+ *    o/p 20
+     * 
+     * This approach is based on single traversal in the above approach we were doing two traversals to find the path of node from root.
+     * This can be reduced to one traversal.
+     * 
+     * This approach is based on one assumption that the target nodes should be present in the tree.
+     * 
+     * There are 4 main cases which needs to be taken care of.
+     * 
+     * Case 1: If currentNode is equal to any of the targetNode return currentNode.
+     *         targetNode: 10, targetNode: 60 and currentNode = 10.
+     *         
+     * 
+     * Case 2: If one side subTree say left tree contains one target value and second side subTree say right subTree contains another target value then 
+     *         surely its the LCA return current node.
+     *         Ex: targetNode: 90, targetNode: 80 and currentNode = 20
+     * 
+     * Case 3: If one side contains both the targetNodes than we need to return what that subTree is returning.
+     *         Ex: targetNode: 90, targetNode: 30 and currentNode = 20.
+     * 
+     * Case 4: If none of the subTree contains any of the targetNode we return null.
+     * 
+     * 
+     * So lets understand these conditions via the code.
+     * 
+     * Initially if root is null return null, meaning there can be no LCA is an null binary tree.
+     * Now for Case 1: If currentNode is equal to any of the targetNode return currentNode.
+     *         targetNode: 10, targetNode: 60 and currentNode = 10.
+     *         if (root.data === targetNode1?.data || root.data === targetNode2?.data) {
+               return root;}
+
+
+        Now recursively call for LCA on left subTree and rightSubTree.
+
+        Case 2: If one side subTree say left tree contains one target value and second side subTree say right subTree contains another target value then 
+     *         surely its the LCA return current node.
+     *         Ex: targetNode: 90, targetNode: 80 and currentNode = 20
+     * 
+     *  if (leftLCA !== null && rightLCA !== null) {
+            return root;
+        }
+
+        Case 3: If one side contains both the targetNodes than we need to return what that subTree is returning.
+     *         Ex: targetNode: 90, targetNode: 30 and currentNode = 20.
+
+        if (leftLCA === null && rightLCA !== null) {
+            return rightLCA;
+        }
+        if (rightLCA === null && leftLCA !== null) {
+            return leftLCA;
+        }
+
+        Case 4: If none of the subTree contains any of the targetNode we return null.
+         if (leftLCA === null && rightLCA === null) {
+            return null;
+        }
+
+     */
+    lowestLevelCommonAncestor1(root: TreeNode<T> | null, targetNode1: TreeNode<T> | null, targetNode2: TreeNode<T> | null) {
+        if (root === null) return null;
+        if (root.data === targetNode1?.data || root.data === targetNode2?.data) {
+            return root;
+        }
+        let leftLCA = this.lowestLevelCommonAncestor1(root.left, targetNode1, targetNode2);
+        let rightLCA = this.lowestLevelCommonAncestor1(root.right, targetNode1, targetNode2);
+        if (leftLCA !== null && rightLCA !== null) {
+            return root;
+        }
+        if (leftLCA === null && rightLCA !== null) {
+            return rightLCA;
+        }
+        if (rightLCA === null && leftLCA !== null) {
+            return leftLCA;
+        }
+        if (leftLCA === null && rightLCA === null) {
+            return null;
+        }
 
     }
 }
