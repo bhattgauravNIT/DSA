@@ -214,7 +214,7 @@ class Tree1 {
         return preOrder;
     }
 
-    
+
     deserialize(preOrder: number[]): Tree1 | null {
         if (this.preIndex === preOrder.length) return null;
         const val = preOrder[this.preIndex];
@@ -231,4 +231,3 @@ let root = new Tree1(10);
 root.left = new Tree1(20);
 root.right = new Tree1(30);
 console.log(root.deserialize(root.serialize(root, [])));
-

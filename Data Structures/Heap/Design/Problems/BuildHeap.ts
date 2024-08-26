@@ -39,19 +39,19 @@ class MinHeap {
      * I/p arr = [10,5,20,2,4,8]
      * We need to convert this into a min heap.
      * 
-     * So the approach is to itearte over every element of this given input array and place the value at right index.
-     * So we itearte over the input arr.
+     * So the approach is to iterate over every element of this given input array and place the value at right index.
+     * So we iterate over the input arr.
      * 
      * At index 0: 
-     *    The parentindex for index 0 is Math.floor(0-1/2) = -1 which our getParentIndex returns undefined.
+     *    The parent index for index 0 is Math.floor(0-1/2) = -1 which our getParentIndex returns undefined.
      *    So we simply push to arr as this is correct only.
      * 
      * At index1: 
      *    The parentIndex for index 1 is Math.floor(1-1/2) = 0 . 
-     *    We check is the parent is greater than the index1 element than we swap beacuse we need to create a min heap and 
+     *    We check is the parent is greater than the index1 element than we swap because we need to create a min heap and 
      *    in min heap every parent node should be smaller than its children.
      * 
-     * We do the same for all the index i,e 0(n*logn)
+     * We do the same for all the index i,e 0(n* logn)
      * 
      */
     buildMinHeap(inputArr: number[]): void {
@@ -72,7 +72,7 @@ class MinHeap {
 
     /**Approach2: 0(n),0(n)
      * 
-     * Lets understand this intution:
+     * Lets understand this intuition:
      * i/p = [10,5,20,2,4,8]
      * 
      *  If we represent the above given input array into complete binary tree then it will look like this.
@@ -82,14 +82,14 @@ class MinHeap {
      *              2    4    8
      * 
      * 
-     * Now if we heapify node 20 i,e place it at correct position then the complete binary tree will look like
+     * Now if we heapfiy node 20 i,e place it at correct position then the complete binary tree will look like
      *                     10
      *                 5         8
      *              2    4    20
      * 
      * 
 
-     * Now if we heapify node 5 i,e place it at correct position then the complete binary tree will look like
+     * Now if we heapfiy node 5 i,e place it at correct position then the complete binary tree will look like
      * 
      *                     10
      *                 2        8
@@ -97,7 +97,7 @@ class MinHeap {
      * 
      * 
      * 
-     * Now if we heapify root node i,e 10 then this complete binary tree will loook like
+     * Now if we heapfiy root node i,e 10 then this complete binary tree will look like
      * 
      *                      2
      *                 4         8
@@ -105,7 +105,7 @@ class MinHeap {
      * 
      * And here we have formed a minHeap.
      * 
-     * So the idea is to start minHeapifying from right most last parent node which is 2 in our case ie node with value 20 in
+     * So the idea is to start minHeapfying from right most last parent node which is 2 in our case ie node with value 20 in
      * given input array.
      * 
      * Clearly for a given input array  [10,5,20,2,4,8]
@@ -114,7 +114,7 @@ class MinHeap {
      * 
      * And then do minHeapification from that index till root index.
      * 
-     * Its time complexity comes out to be 0(n) although it gives an intition of 0(n*logn)
+     * Its time complexity comes out to be 0(n) although it gives an intuition of 0(n*logn)
      * 
      */
     buildHeap1() {

@@ -88,7 +88,9 @@ _Tree Traversal_:
                   }
                 }
 
+
   -------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---------------------------
+
 
 - _Conceptual Problems_
 
@@ -208,7 +210,7 @@ _Tree Traversal_:
 
 
             **Intuition**:
-                    In level order traversal the first node of every level is the part of the left view for that specific level. Do a per level level order tareversal
+                    In level order traversal the first node of every level is the part of the left view for that specific level. Do a per level level order traversal
                     and see for i=0th node of every level.
 
             Algo:
@@ -299,7 +301,7 @@ _Tree Traversal_:
 
 
 **6. Is height balanced:**
-  **Problem:** For a binary tree check is every root is height balanced or not. Height balanced means Math.abs(heigh(left)-height(right))<=1 satifies for every
+  **Problem:** For a binary tree check is every root is height balanced or not. Height balanced means Math.abs(heigh(left)-height(right))<=1 satisfies for every
                condition.
 
                                  10
@@ -723,18 +725,26 @@ _Tree Traversal_:
 
               Algo: 
 
-              Serialization:
+              *Serialization:*
 
-              Do a preOrder or any DFS traversal of the tree and store in an array with null nodes stored as -1 in the array.
+              Do a preOrder or any BFS traversal of the tree and store in an array with null nodes stored as -1 in the array.
+              
               if (root === null) push -1 to the array
+              return array
+
               preOrder.push(root?.data);
+
+              if root and root.data exists
               call function recursively for left node
               call function recursively for right node.
 
+              return preOrder
 
-              DeSerialization
+
+              *DeSerialization*
         
               Maintain a global shared variable called say index to iterate over the serialized array.
+              if this global variable is equal to the serialized array length then return null;
               const value = preOrder[index];
               index++;
               if this val is -1 thus it resembles a null node hence return null
@@ -742,9 +752,27 @@ _Tree Traversal_:
               make a new root of Tree with this val
               root.left = recursively call the function.
               root.right = recursively call the function.
+              return root.
 
               These root.left and root.right provides linkage with subTree formulated and thus entire tree is formed.
-              
+
+
+
+**16. Store preOrder Traversal in an array with null nodes as -1:** 
+          **Intuition:** Do same as preOrder traversal but when root is null, push -1 to res array and return array.
+
+          **Algo:**
+             function which takes param a root node and a res array initially empty
+             If root is null 
+             push to -1 to res array
+             return res
+
+             push(root.data) to res if they exists
+             call function recursively (root->left, res)
+             call function recursively (root-> right, res)
+             return res;
+
+
 
 ----------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--------------------------------------
 
