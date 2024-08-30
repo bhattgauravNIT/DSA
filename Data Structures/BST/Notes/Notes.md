@@ -84,6 +84,7 @@
       Find the left extreme leaf node
       This node will be the closestGreater value node.
 
+
       Delete function:
       If root is null return null stating either we are deleting from a null BST or we reached null node.
       if(x < root.val){
@@ -109,11 +110,12 @@
            return null;
        }
 
-       **case3: this root is having both left anf right child**
+       **case3: this root is having both left and right child**
        find the closestGreaterValueNode from the current or even the closestSmallerValueNode
        let suppose we called for closestGreaterValueNode
        so this will return a node which is has value next Greater than current node.
        we make the current node value as this value.
+       
        Now we will delete this node which had value next Greater previously than current node by recursively calling
        function delete on right subTree as its present at right only and with value closestGreaterValueNode.val;
 
@@ -128,49 +130,226 @@
 
 
 
----------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>-------------------------------------------------------
+---------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>-------------------------------------------------------------
+
 
 *Problems:*
 
+
 **1. Smallest Closest value node/ floor of node value in BST:**
-     **Intuition:**
+     **Intuition:** Inorder traversal always give sorted array in case of BST so get the sorted array and find the closest smallest 
+                    number compared to the given x value. 
 
-     **Algo:**
+     **Algo1:** 
+            function getInOrder(root, inorder[])
 
+            if root is null return inorder[];
+            recursivelyCall for left root (root.left, inOrder);
+            push root to inOrder[];
+            recursivelyCall for right root (root.right, inOrder);
+            return inOrder;
+
+            function closest smaller
+
+            if root === null return null stating there exists no node whose value is closest smaller to given input value.
+            let inOrder[] = call function getInOrder(root);
+
+            if lastIndex value of inOrder is smaller than input value then this value itself is the closest smallest.
+            if firstIndex value of inOrder is itself greater than input value than the input value has no closest smaller value.
+
+            Iterate over the inOrder array and find the first element after which the next element in array is greater than the input
+            value or the element which is equal to the input value.
+
+            This element is the result.
+
+
+      **Intuition:** 
+      
+                                 10
+                        5                15
+                                  12           30
+   
+                  x = 14
+            If we are moving right in a BST this means that value which we are trying to search is greater than the existing root val. Since the root val is 
+            lesser than the input value and thus this root val is a potential candidate for being the floor/ smallest closest number in comparison to x.
+
+     **Algo2:**
+
+           if root is null return null, stating there exists no value which is floor of given input value.
+           Maintain a current equal to root initially to traverse through the BST.
+           while(current !== null){
+
+            if(x > root.val){
+                  current = current.right;
+                  res = current.val;
+            }else if(x < root.val){
+                  current = current.left;
+            }else{
+                  return x;
+            }
+
+           }
+           return res;
+            
 
 
 **2. Greater Closest value node/ ceil of a node value in BST:**
-     **Intuition:**
+     **Intuition:** Inorder traversal always give sorted array in case of BST so get the sorted array and find the closest greater 
+                    number compared to the given x value. 
 
-     **Algo:**
+     **Algo1:** 
+            function getInOrder(root, inorder[])
+
+            if root is null return inorder[];
+            recursivelyCall for left root (root.left, inOrder);
+            push root to inOrder[];
+            recursivelyCall for right root (root.right, inOrder);
+            return inOrder;
+
+            function closest greater
+
+            if root === null return null stating there exists no node whose value is closest greater to given input value.
+            let inOrder[] = call function getInOrder(root);
+
+            if lastIndex value of inOrder is smaller than input value then the given input value is having no closest greater element.
+            if firstIndex value of inOrder is itself greater than input value than this value itself is the closest greater.
+
+            Iterate over the inOrder array and find the first element in array is greater than the input
+            value or the element which is equal to the input value.
+
+            This element is the result.
+
+
+
+      **Intuition:** 
+      
+                                 10
+                        5                15
+                                  12           30
+   
+                  x = 14
+            If we are moving left in a BST this means that value which we are trying to search is lesser than the existing root val. Since the root val is 
+            greater than the input value and thus this root val is a potential candidate for being the ceil/ greater closest number in comparison to x.
+
+     **Algo2:**
+
+           if root is null return null, stating there exists no value which is floor of given input value.
+           Maintain a current equal to root initially to traverse through the BST.
+           while(current !== null){
+
+            if(x > root.val){
+                  current = current.right;
+            }else if(x < root.val){
+                  current = current.left;
+                  res = current.val;
+            }else{
+                  return x;
+            }
+           }
+           return res;
+            
 
 
 
 **3. GreaterClosest value on left in an array:**
-      **Intuition**
+      **Intuition:** Keep formulating a BST such that for any ith index in array the bST contains all element from 0-> i-1 i,e left side
+                  element and for the ith index element find the closest greater element/ceil in BST.
 
       **Algo**
+           push -1 to res, indicating that for index = 0, there exits no element greater to left of it.
+           create a new BST node with i=0, index element and mark it as root.
+
+           iterate over the given input array.
+           mark root as current and ceil as -1.
+           iterate over the bST using current
+
+           if(current.val < arr[i]) move right
+           else if(current.val > arr[i]) move left and update ceil as its a potential candidate.
+
+           once iteration over BST is done push ceil to res.
+           Push arr[i] to BST as a new node. 
 
 
 
 **4. Rotate a BST in right/clockwise from root:**
-     **Intuition:**
+     **Intuition:**    
+             7                                  
+            6                 ->>>>>      
+          5
 
-     **Algo**
+                                                      6
+                                                 5        7
+
+     **Algo:**
+           let newRoot = currentRoot.left;
+           currentRoot.left = newRoot.right;
+           newRoot.right = root
+
 
 
 
 **5. Rotate a BST in left/anti-clockwise from root:**
-     **Intuition:**
+     **Intuition:**    
+             7                                  
+               8                 ->>>>>      
+                 9
 
-     **Algo**
+                                                      8
+                                                 7        9
+
+     **Algo:**
+           let newRoot = currentRoot.right;
+           currentRoot.right = newRoot.left;
+           newRoot.left = root
 
 
 
 **6. Kth smallest element in BST** 
-     **Intuition**
+     **Intuition:1** The inorder traversal of a BST gives a sorted array, so get the inOrder traversal and find kth smallest
+     element in sorted array.
 
      **Algo1:**
+
+            function getInOrder(root, inorder[])
+
+            if root is null return inorder[];
+            recursivelyCall for left root (root.left, inOrder);
+            push root to inOrder[];
+            recursivelyCall for right root (root.right, inOrder);
+            return inOrder;
+
+            function kth smallest
+
+            if root is null return undefined stating there exits no kth smallest element
+            inOrder = call getInorder();
+            return inOrder[k-1];
+
+
+
+      **Intuition:2** Instead of completely doing inOrder and thus storing and then finding the kth smallest can we find it 
+        during inOrder traversal only.
+
+      **Algo2:**
+
+           function kth smallest
+
+           let obj = { cnt: 0, value: -1 }; -1 signifies initially no kth smallest element exits.
+           obj = callInorder(root,obj);
+           obj.value === -1  return undefined else return obj.value
+
+
+           function Inorder
+
+           if root === null return obj;
+           obj = recursively call inOrder function on left subTree (root.left,obj);
+           increment obj.cnt;
+
+           check if obj.cnt === k
+               update obj.value as root.val indicating this is the kth smallest element;
+
+            obj = recursively call inOrder function on right subTree (root.right, obj);
+            return obj
+
 
 
 
@@ -178,6 +357,8 @@
      **Intuition**
 
      **Algo**
+
+
 
 
 **8. Fix BST with two nodes swapped**

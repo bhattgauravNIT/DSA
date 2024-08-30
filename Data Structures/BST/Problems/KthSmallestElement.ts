@@ -47,6 +47,10 @@ class BST<T> {
     /**
      * Approach1: 0(n),0(n)
      * 
+     * This approach is simply based on the idea that inOrder traversal of an BST is a sorted array.
+     * So once we get inorder traversal of BST the problem reduced to finding kth smallest element in an sorted array.
+     * If we assume that BST is not containing any duplicates than inorder[k-1] is the kth smallest element in the array 
+     * 
      */
 
     getInorder(root: BST<T> | null, inOrder: number[]): number[] {
@@ -64,7 +68,21 @@ class BST<T> {
     }
 
 
-    /**Approach2: 0(h+k),0(h+k)   */
+    /**Approach2: 0(h+k),0(h+k) 
+     * 
+     * Previously we were doing inOrder traversal completely and thus the time complexity was 0(n) and then storing this inOrder
+     * in an array therefore increasing space complexity even to 0(n).
+     * 
+     * If somehow doing inOrder traversal only we can come up with the kth smallest element than it can significantly reduce the
+     * time complexity from 0(n)-> 0(h+k) where h is the height of the BST.
+     * 
+     * so we pass a global variable say let obj = { cnt: 0, value: -1 } which holds the cnt and a value initially as -1
+     * indicating there exits no kth smallest element at this time.
+     * 
+     * Now we start inOrderTraversal but where we were pushing root.val into inOrder array previously we will increment the obj.cnt
+     * and will check if obj.cnt === k this means that this root.val is the kth smallest element so we update obj.value
+     * and return from the recursion and there by not even going further.
+      */
     kthSmallest1(root: BST<T> | null, k: number) {
         if (root === null) return;
         let obj = { cnt: 0, value: -1 };
@@ -81,7 +99,8 @@ class BST<T> {
             obj.value = Number(root.val);
             return obj;
         }
-        return this.inorder(root.right, k, obj);
+        obj = this.inorder(root.right, k, obj);
+        return obj;
     }
 }
 
@@ -93,9 +112,38 @@ root.insert(root, 18);
 console.log(root.kthSmallest1(root, 2))
 
 
-/**Approach3: 
+/**Approach3: 0(logn),0(1)
  * 
- * Augmented BST
+ * We will be using the concept of Augmented BST, every node apart from storing the address to left node, value and address to right node
+ * will now also be storing the leftCount or the count of total number of left nodes from it which are present in the left subTree.
+ * 
+ * So during insertion if we are moving left in order to find the correct position where the node should be placed, we will be incrementing
+ * the leftCount.
+ * 
+ * In this way during insertion process only we will be able to have left count handy for all the nodes.
+ * 
+ * Now while traversing in the bST there are three possibilities.
+ * 
+ * 1. The value of leftCount +1 of the node which we are visiting right now is greater than k.
+ * This means on the leftSide there exits ample number of nodes from which one is kth smallest and thus we simply move left.
+ * 
+ * 2. The value of leftCount + 1 of the node which we are visiting right now is equal to k.
+ * This means its the kth smallest element in the BST.
+ * 
+ * 3. The value of leftCount + 1 of the node which we are visiting right now is lesser than the k.
+ * This means on the leftSide there don't exits ample number of nodes for which one is kth smallest so we have to move right now
+ * but since every node is having additional value of number of nodes present left of it and if we are moving right this means k has to be
+ * modified as  k - (current.leftCount + 1);
+ * 
+ * Lets understand with help of an example
+ * 
+ * Case1.        k=3 i,e give me 3rd smallest element.
+ *                              
+ *                                            10
+ *                                    8              12     
+ *                                7      6        11
+ * 
+ *  
  */
 
 class AugmentedBst<T> {
@@ -110,6 +158,7 @@ class AugmentedBst<T> {
         this.right = right;
         this.leftCount = 0;
     }
+
 
     insert(root: AugmentedBst<T> | null, x: T) {
         if (root === null) return new AugmentedBst<T>(x);
@@ -133,6 +182,7 @@ class AugmentedBst<T> {
         }
         return root;
     }
+
 
     findKSmallest(root: AugmentedBst<T> | null, k: number) {
         if (root === null) return;

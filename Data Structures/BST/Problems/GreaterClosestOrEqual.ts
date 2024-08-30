@@ -47,6 +47,48 @@ class BST<T> {
         return root;
     }
 
+    /**Approach1: 0(n),0(n)
+     *
+     * This approach uses the fact that the inOrder traversal of a BST will always be a sorted array.
+     * 
+     * Lets understand this approach with help of an example.
+     *                           10
+ *                      5                15
+ *                                12           30
+ * 
+     * x = 14.
+     * 
+     * So the inorder traversal of the above BST will be like:
+     * 
+     * 5,10,12,15,30
+     * 
+     * Now simply iterate over the inOrder traversal array and find the value which is greater than the input value.
+     * 
+     * Iterate over the array.
+     * i=0; arr[i]<14 move ahead
+     * i=1; arr[i]<14 move ahead
+     * i=2; arr[i]<14 move ahead
+     * i=3; arr[i]>14 so arr[1] is the answer.
+     * 
+     * We need to take account on the condition that
+     * 1. if arr[i] === x than arr[i] will only be the closest greatest value
+     * 
+     * 2. If root provided of BST is null then result is null as nothing exists in BST.
+     * 
+     * 3. If last element of the array is smaller than the value whose smallest greater is to be found, then no closest greater value exists.
+     * 
+     * For ex: [5,10,12,15,30]
+     * x = 100
+     * 
+     * clearly the last element is 30 which itself is smaller than 100 thus no closest Greater element exists.
+     * 
+     * 4. If arr[0] > x
+     * this means that the first element of the arr is itself the greater closest element in array.
+     * 
+     * Else find the value which is just greater than the given input value in array.
+     * 
+     *
+     */
     private getInorder(root: BST<T> | null, inOrder: BST<T>[]) {
         if (root === null) return inOrder;
         this.getInorder(root.left, inOrder);
@@ -55,11 +97,6 @@ class BST<T> {
         return inOrder;
     }
 
-    /**Approach1: 0(n),0(n)
-     *
-     * [5,6,7,8,19,20]
-     * 
-     */
     closestGreatestValue(root: BST<T> | null, x: T): BST<T> | null {
         if (root === null) return null;
         let inOrder = this.getInorder(root, []);
@@ -79,11 +116,32 @@ class BST<T> {
 
     /**Approach2: 0(n),0(1) ~= 0(n),0(1) in case of skewed tree
      * 
-     *                                10
-     *                      5                   15
-     *                                   12           30
+     *  
+     *  Lets understand this approach with the help of an example
      * 
-     * x = 14
+     *                          10
+ *                      5                15
+ *                                12           30
+ * 
+     * x = 14.
+     * 
+     * 
+     * This approach is based on simple traversal of a BST.
+     * Initially we are at root 10,
+     * 
+     * 14 > 10 , so we should move right but since 10 < 14 , thus its not a potential candidate to be the closest greatest
+     * element, so we simply move right.
+     * 
+     * Now we at 15.
+     * 14 < 15 so 15 is a potential candidate to be closest greatest to 14 so we updated res and move left.
+     * 
+     * Now we are at 12, 
+     * 14 > 12 and thus 12 is not a potential candidate to be closest greatest to 14 and thus we don't update res and move right.
+     *   
+     * we found null
+     * and thus our iteration ends.
+     * 
+     * So we got result 15 which is smallest greatest possible value.
      * 
     */
     closestGreatestValue1(root: BST<T> | null, x: T) {

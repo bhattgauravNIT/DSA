@@ -24,8 +24,32 @@ class BST<T> {
         this.right = right;
     }
 
-    /**Approach:0(1),0(1)
+    /**Approach: 0(1),0(1)
      * 
+     * Lets understand this with help of an example
+     * 
+     *                           
+              7                                  
+               8                 ->>>>>      
+                9
+
+                                                      8
+ *                                                7        9
+
+
+         So we need to left rotate this.
+
+         In the left rotated BST, 
+         
+         1. new root is the current's root right, 
+         so let newRoot = root.right;
+
+
+         2. Whatever is in new root's left will be greater than current root and thus should be placed in right of current root.
+         so root.right = newRoot.left;
+
+         3. Now newRoot's left should be having everything from the root so
+         newRoot.left = root.
      * 
      * 
      */
