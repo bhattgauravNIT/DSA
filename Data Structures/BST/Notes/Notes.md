@@ -304,6 +304,7 @@
 
 
 
+
 **6. Kth smallest element in BST** 
      **Intuition:1** The inorder traversal of a BST gives a sorted array, so get the inOrder traversal and find kth smallest
      element in sorted array.
@@ -354,17 +355,385 @@
 
 
 **7. Is a BST:**
-     **Intuition**
+     **Intuition1:** Inorder traversal of a BST always give a sorted array, in case array is not sorted then its not a BST.
 
-     **Algo**
+     **Algo:**
+           function getInOrder(root, inorder[])
+
+            if root is null return inorder[];
+            recursivelyCall for left root (root.left, inOrder);
+            push root to inOrder[];
+            recursivelyCall for right root (root.right, inOrder);
+            return inOrder;
 
 
+            function isBST
+            if root is null return true indicating that its a BST.
+            let inOrder = call function getInOrder with root
+            iterate over the inOrder array from index = 1
+            if(inOrder[index-1] !== inOrder[index]) simply return false;
+            
+            else return false;
 
 
-**8. Fix BST with two nodes swapped**
-      **Intuition**
+      **Intuition2:**
       
-      **Algo**
+                                                        20               ->>>>>   (-Infinity to +Infinity)
+                      (-infinity to 20)           8          30      ------------------------>       (20 to +infinity)
+                       (20 to 30)                        18       35                    ----------> (20 to 30)
 
-     
+            In order for a tree to be a BST every node should fall in a specific range i,e say if root is between -Infinity to +Infinity , then its left child
+            should be between -Infinity to root.val and its right child should be between root.val to +Infinity. If the range is violated for any node then its
+            not a BST.
 
+      **Algo2:** 
+
+           function isBst(root, lowerLimit = -Infinity, upperLimit = +infinity);
+           check if root.val > lowerLimit && root.val < upperLimit is getting violated then return false;
+           let isLeftBst = recursivelyCall for leftBst with root.left and modified upper range while lowerRange remains same
+           let isRight = recursively call for rightBst with root.right and modified lowerLimit with upperRange remains same
+           return isLeft && isRight
+
+
+
+
+**8. Find BST with two nodes swapped**
+      **Intuition1** The inOrder traversal of a BST should be a sorted array, since the tree is corrupted by 2 nodes therefore there are 
+           two values in inOrder traversal which which are misplaced.
+           Case1: Two values misplaced are present adjacent to each other
+           Case2: Two values misplaced are not adjacent to each other.
+      
+      **Algo1**
+          
+           function getInOrder(root, inorder[])
+
+           if root is null return inorder[];
+           recursivelyCall for left root (root.left, inOrder);
+           push root to inOrder[];
+           recursivelyCall for right root (root.right, inOrder);
+           return inOrder;
+
+
+           function fixBst
+
+           if root === null return {val1: undefined, val2: undefined};
+           let inOrder = getInOrder call with root;
+           maintain val1 with initial value as Infinity;
+           maintain val2 with initial value as Infinity;
+           iterate over inOrder traversal from i=1
+           if(inOrder[i]< inOrder[i-1]){
+             if(val1 === infinity){
+                  val1 = inOrder[i-1];
+                  val2 = inOrder[i];
+             }
+             if(val1 !== infinity){
+                  val2 = inOrder[i];
+             }
+           }
+           return {val1, val2};
+
+      
+
+      **Intuition2:** Instead of first calling inOrder and then storing in an array, and then checking for nodes which are culprits, if we can somehow
+           do this while doing inOrder traversal only then it will be a better solution.
+           
+
+      **Algo2:** 
+
+          function fixBst
+
+          mainTain an obj having three properties root1 which has value of first culprit node, root2 which has value of second culprit node and a prev.
+          All three should be null initially.
+          if root is null return obj
+          call function ModifiedInOrder with root and obj as argument.
+
+
+          function ModifiedInOrder(root, obj)
+
+          if root is null return obj;
+          let obj = recursivelyCall for ModifiedInOrder with root.left;
+          if(root.val <  obj.prev) stating that the property of BST inorder is being violated then
+          {
+            if(obj.roo1 === null){
+                  obj.root1 = prev;
+                  obj.root2 = root.val
+            }
+            if(obj.root1 !== null){
+                  obj.root2 = root.val
+            }
+          } 
+          These above case is same as the above approach where 
+          Case1: Two values misplaced are present adjacent to each other
+          Case2: Two values misplaced are not adjacent to each other.
+
+          let obj = recursivelyCall for ModifiedInOrder with root.right;
+          return obj;
+
+
+**9. Pair sum with given BST:**
+          **Intuition:** Maintain a map and for every node check if mp contains a key of (sm-node.val), if yes there exits a pair with sum sm
+           else simply insert the node's val in map. Its similar to two sum.
+
+
+          **Algo:**
+
+          function traversal(root, obj: {isPairSum})
+
+           if root is null return obj indicating we have reached a null node.
+           recursivelyCall for left root (root.left, obj);
+           if(!mp.has(sm-root.val)){
+
+            indicating that map don't contain sm-root.val for this root and thus we can't form a pair with this node's value.
+            mp.set(root.val,1) thus we set the map with this node's val.
+
+           }else{
+
+            indicating that map contains a pair with sum k for this root node.
+            obj.isPairSum = true
+            return obj
+           }
+
+           recursivelyCall for right root (root.right, obj);
+           return obj;
+
+
+           function hasPairSum
+
+           if root is null return false indicating there exists no pair with sum k as root itself is null and tree is empty.
+           Form an obj = {isPairSum: false};
+           obj = call function traversal(root,obj);
+           return obj.isPairSum;
+            
+
+
+-------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------------------------------------------
+
+*View of trees*
+
+
+**1. Vertical sum in Binary tree:**
+          **Intuition:**   For ex: 
+                                 10
+                            20        30
+                        5        15
+   
+                                                    So o/p is 5,20,25,30
+            
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            horizontalDist of leftChild = horizontalDist of parent - 1.
+            horizontalDist of rightChild = horizontalDist of parent + 1.
+
+            Maintain a map which <horizontalDist, sum>.
+            If we encounter a node whose horizontal dist is already present in map, then update the value of the map for that horizontalDist
+            by adding the nodes value.
+
+            If we are encountering the horizontal dist for the first time, set in map and mark the value of node.value.
+   
+
+          **Algo:**
+
+          function getVerticalSum(root, hd = 0)
+
+          if root is null return
+          if map doesn't contains hd then set hd in map with value root.val
+          else if map contains hd update the hd key in map with (currentValue of map)+ root.val
+          recursivelyCall the function getVerticalSum with (root.left, hd-1)
+          recursively call the function getVerticalSum with (root.right, hd+1)
+
+
+          function verticalSum(root)
+
+          if root is null return null indicating there doesn't exist any vertical sum in this empty tree.
+          Maintain a map which is global variable
+          call function  getVerticalSum(root)
+          Now the map contains all the sum of every horizontal distance
+          sort the map
+          let arr = Arrays.form(mp);
+          arr.sort((a,b)=> a[0]-b[0]) indicating we are sorting by keys
+          convert this array into map
+          mp = new Map(arr);
+          traverse through the map anf print all values of the map.
+
+
+
+
+**2. Vertical traversal of a Binary tree:**   
+          **Intuition:**   For ex: 
+                                 10
+                            20        30
+                        5        15
+   
+                                                    So o/p is 5,20,10,15,30
+            
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            horizontalDist of leftChild = horizontalDist of parent - 1.
+            horizontalDist of rightChild = horizontalDist of parent + 1.
+
+            Maintain a map which <horizontalDist, []>.
+            If we encounter a node whose horizontal dist is already present in map, then update the value of the map for that horizontalDist
+            by pushing node.value to found key in map.
+
+            If we are encountering the horizontal dist for the first time, set in map and mark the [value of node.value]
+
+            Fill the map via level order traversal, to successfully handle the cases of two node with same horizontal distance overlapping and not being
+            on top or bottom of each other.
+
+            For level order traversal maintain a queue of pair {node: TreeNode, horizontalDistance: number}
+   
+
+          **Algo:**
+
+          function getVerticalRoots(root)
+
+          push root to queue
+          while(!q.isEmpty())
+          {
+
+            let item = pop from queue;
+            check if item.horizontalDist is present in map
+            if present modify the key of horizontal dist via pushing (root.val) in array of values of the key.
+            if not present insert the horizontal dist as key against [root.val] in values of the key.
+
+            if(left child of item exists) push left child in queue with horizontal distance as item.horizontalDist + 1.
+            if(right child of item exists) push right child in queue with horizontal distance as item.horizontalDist - 1.
+
+          }
+
+          The map will get set with all possible horizontal distance against array of nodes against it.
+          
+
+
+          function verticalTraversal(root)
+
+          if root is null return null indicating there doesn't exist any vertical traversal in this empty tree.
+          Maintain a map which is global variable
+          call function  getVerticalRoots(root)
+          Now the map contains all the possible horizontal distance against array of nodes against it.
+          sort the map in ascending order because we need to give vertical traversal from left most
+          let arr = Arrays.form(mp);
+          arr.sort((a,b)=> a[0]-b[0]) indicating we are sorting by keys
+          convert this array into map
+          mp = new Map(arr);
+          traverse through the map anf print all values of the map.
+
+
+
+**3. Top view of a binary tree:**
+          **Intuition:**   For ex: 
+                                 10
+                            20        30
+                        5        15
+   
+                                                    So o/p is 5,20,10,30
+            
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            horizontalDist of leftChild = horizontalDist of parent - 1.
+            horizontalDist of rightChild = horizontalDist of parent + 1.
+
+            Maintain a map which <horizontalDist, []>.
+            If we encounter a node whose horizontal dist is already present in map we don't do anything.
+
+            If we are encountering the horizontal dist for the first time, set in map and mark the [value of node.value] as this node is the first node
+            with that horizontal dist or contribute to the top view of the tree for that vertical level.
+
+            Fill the map via level order traversal, to successfully handle the cases of two node with same horizontal distance overlapping and not being
+            on top or bottom of each other.
+
+            For level order traversal maintain a queue of pair {node: TreeNode, horizontalDistance: number}
+   
+
+          **Algo:**
+
+          function getVerticalRoots(root)
+
+          push root to queue
+          while(!q.isEmpty())
+          {
+
+            let item = pop from queue;
+            check if item.horizontalDist is present in map
+            if not present insert the horizontal dist as key against [root.val] in values of the key.
+
+            if(left child of item exists) push left child in queue with horizontal distance as item.horizontalDist + 1.
+            if(right child of item exists) push right child in queue with horizontal distance as item.horizontalDist - 1.
+
+          }
+
+          The map will get set with all possible horizontal distance against array of node of the top view against it.
+          
+
+
+          function verticalTraversal(root)
+
+          if root is null return null indicating there doesn't exist any vertical traversal in this empty tree.
+          Maintain a map which is global variable
+          call function  getVerticalRoots(root)
+          Now the map contains all the possible horizontal distance against array of node against it.
+          sort the map in ascending order because we need to give vertical traversal from left most
+          let arr = Arrays.form(mp);
+          arr.sort((a,b)=> a[0]-b[0]) indicating we are sorting by keys
+          convert this array into map
+          mp = new Map(arr);
+          traverse through the map anf print all values of the map.
+
+
+
+
+**3. Bottom view of a binary tree:**
+          **Intuition:**   For ex: 
+                                 10
+                            20        30
+                        5        15
+   
+                                                    So o/p is 5,20,15,30
+            
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            horizontalDist of leftChild = horizontalDist of parent - 1.
+            horizontalDist of rightChild = horizontalDist of parent + 1.
+
+            Maintain a map which <horizontalDist, []>.
+            If we encounter a node whose horizontal dist is already present in map we override the existing value with new node value.
+
+            If we are encountering the horizontal dist for the first time, set in map and mark the [value of node.value] as this node is the last node
+            with that horizontal dist or contribute to the bottom view of the tree for that vertical level.
+
+            Fill the map via level order traversal, to successfully handle the cases of two node with same horizontal distance overlapping and not being
+            on top or bottom of each other.
+
+            For level order traversal maintain a queue of pair {node: TreeNode, horizontalDistance: number}
+   
+
+          **Algo:**
+
+          function getVerticalRoots(root)
+
+          push root to queue
+          while(!q.isEmpty())
+          {
+
+            let item = pop from queue;
+            set map with horizontal dist against value of node
+            this automatically override the value in case the key is already present and set the key with value in case its being getting inserted for the first time.
+
+            if(left child of item exists) push left child in queue with horizontal distance as item.horizontalDist + 1.
+            if(right child of item exists) push right child in queue with horizontal distance as item.horizontalDist - 1.
+
+          }
+
+          The map will get set with all possible horizontal distance against array of node of the bottom view against it.
+          
+
+
+          function verticalTraversal(root)
+
+          if root is null return null indicating there doesn't exist any vertical traversal in this empty tree.
+          Maintain a map which is global variable
+          call function  getVerticalRoots(root)
+          Now the map contains all the possible horizontal distance against array of node against it.
+          sort the map in ascending order because we need to give vertical traversal from left most
+          let arr = Arrays.form(mp);
+          arr.sort((a,b)=> a[0]-b[0]) indicating we are sorting by keys
+          convert this array into map
+          mp = new Map(arr);
+          traverse through the map anf print all values of the map.
+          
