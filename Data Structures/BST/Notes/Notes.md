@@ -74,7 +74,7 @@
 **3. Delete a key in BST**
       **Intuition:** There can be generalized three types of nodes which could be deleted from a BST.
                      1. A node which is having either left child or a right child.
-                     2. A node which is not having any child or a leaf node
+                     2. A node which is not having any child or is a leaf node
                      3. A node which is having both left as well as right child.
 
       **Algo**
@@ -126,7 +126,7 @@
       }
 
       Note: This logic used for finding the closestGreaterValueNode for a given node works only in case when node has both left
-            and right children and thus cant be used for any other case as it will fail.
+            and right children and thus cant be used for any other generalized case as it will fail.
 
 
 
@@ -172,6 +172,7 @@
                   x = 14
             If we are moving right in a BST this means that value which we are trying to search is greater than the existing root val. Since the root val is 
             lesser than the input value and thus this root val is a potential candidate for being the floor/ smallest closest number in comparison to x.
+
 
      **Algo2:**
 
@@ -271,6 +272,7 @@
 
 
 
+
 **4. Rotate a BST in right/clockwise from root:**
      **Intuition:**    
              7                                  
@@ -301,6 +303,7 @@
            let newRoot = currentRoot.right;
            currentRoot.right = newRoot.left;
            newRoot.left = root
+
 
 
 
@@ -376,11 +379,12 @@
             else return false;
 
 
+
       **Intuition2:**
       
                                                         20               ->>>>>   (-Infinity to +Infinity)
-                      (-infinity to 20)           8          30      ------------------------>       (20 to +infinity)
-                       (20 to 30)                        18       35                    ----------> (20 to 30)
+                      (-infinity to 20)           8          30           ------------------------>       (20 to +infinity)
+                       (20 to 30)                        18       35        ----------> (20 to 30)
 
             In order for a tree to be a BST every node should fall in a specific range i,e say if root is between -Infinity to +Infinity , then its left child
             should be between -Infinity to root.val and its right child should be between root.val to +Infinity. If the range is violated for any node then its
@@ -466,6 +470,8 @@
           Case1: Two values misplaced are present adjacent to each other
           Case2: Two values misplaced are not adjacent to each other.
 
+          prev = root.val , sets the previous value for upcoming recursive call.
+
           let obj = recursivelyCall for ModifiedInOrder with root.right;
           return obj;
 
@@ -481,9 +487,9 @@
 
            if root is null return obj indicating we have reached a null node.
            recursivelyCall for left root (root.left, obj);
-           if(!mp.has(sm-root.val)){
+           if(!mp.has(sm - root.val)){
 
-            indicating that map don't contain sm-root.val for this root and thus we can't form a pair with this node's value.
+            indicating that map don't contain sm - root.val for this root and thus we can't form a pair with this node's value.
             mp.set(root.val,1) thus we set the map with this node's val.
 
            }else{
@@ -500,13 +506,13 @@
            function hasPairSum
 
            if root is null return false indicating there exists no pair with sum k as root itself is null and tree is empty.
-           Form an obj = {isPairSum: false};
+           maintain an obj = {isPairSum: false};
            obj = call function traversal(root,obj);
            return obj.isPairSum;
             
 
 
--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>----------------------------------------------
+-------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--------------------------------------------------------
 
 *View of trees*
 
@@ -519,7 +525,10 @@
    
                                                     So o/p is 5,20,25,30
             
-            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. We need to find sum of all nodes with same horizontal
+            distance.Thus use hashing to store horizontalDist -> sum of nodes in the same horizontal dist.
+            
+            Horizontal distance is
             horizontalDist of leftChild = horizontalDist of parent - 1.
             horizontalDist of rightChild = horizontalDist of parent + 1.
 
@@ -527,7 +536,7 @@
             If we encounter a node whose horizontal dist is already present in map, then update the value of the map for that horizontalDist
             by adding the nodes value.
 
-            If we are encountering the horizontal dist for the first time, set in map and mark the value of node.value.
+            If we are encountering the horizontal dist for the first time, set in map and mark the value as node.value.
    
 
           **Algo:**
@@ -545,14 +554,16 @@
 
           if root is null return null indicating there doesn't exist any vertical sum in this empty tree.
           Maintain a map which is global variable
+
           call function  getVerticalSum(root)
+
           Now the map contains all the sum of every horizontal distance
-          sort the map
+          sort the map as we need to give sum of all vertical levels from left of the tree.
           let arr = Arrays.form(mp);
           arr.sort((a,b)=> a[0]-b[0]) indicating we are sorting by keys
           convert this array into map
           mp = new Map(arr);
-          traverse through the map anf print all values of the map.
+          traverse through the map and print all values of the map.
 
 
 
@@ -565,7 +576,10 @@
    
                                                     So o/p is 5,20,10,15,30
             
-            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. We need to find all the nodes with same horizontal
+            distance and thus use hashing to store horizontalDist -> [nodes.value]
+            
+            Horizontal distance is
             horizontalDist of leftChild = horizontalDist of parent - 1.
             horizontalDist of rightChild = horizontalDist of parent + 1.
 
@@ -608,6 +622,7 @@
           if root is null return null indicating there doesn't exist any vertical traversal in this empty tree.
           Maintain a map which is global variable
           call function  getVerticalRoots(root)
+
           Now the map contains all the possible horizontal distance against array of nodes against it.
           sort the map in ascending order because we need to give vertical traversal from left most
           let arr = Arrays.form(mp);
@@ -625,8 +640,12 @@
                         5        15
    
                                                     So o/p is 5,20,10,30
+
+            Top 
             
-            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. We need to find the very first node for every new horizontal distance being encountered and thus use hashing to store horizontalDist -> [nodes.value]
+            
+            Horizontal distance is
             horizontalDist of leftChild = horizontalDist of parent - 1.
             horizontalDist of rightChild = horizontalDist of parent + 1.
 
@@ -687,7 +706,9 @@
    
                                                     So o/p is 5,20,15,30
             
-            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. Horizontal distance is
+            All nodes with same horizontal distance lies on same vertical line or are on same vertical level. We need to find the last node for every new horizontal distance being encountered and thus use hashing to store horizontalDist -> [nodes.value]
+
+            Horizontal distance is
             horizontalDist of leftChild = horizontalDist of parent - 1.
             horizontalDist of rightChild = horizontalDist of parent + 1.
 

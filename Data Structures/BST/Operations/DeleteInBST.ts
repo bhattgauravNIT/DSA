@@ -162,9 +162,11 @@ class BST<T> {
             } else if (root.left === null && root.right === null) {
                 return null;
             } else {
-                let temp = this.getGreaterClosestValue(root);
-                root.val = temp.val;
-                root.right = this.delete(root.right, temp.val);
+                if (root.right) {
+                    let temp = this.getGreaterClosestValue(root.right);
+                    root.val = temp.val;
+                    root.right = this.delete(root.right, temp.val);
+                }
             }
         }
         return root;

@@ -1,0 +1,1 @@
+Greedy algo is use for optimizations in max or min kind of problems.
