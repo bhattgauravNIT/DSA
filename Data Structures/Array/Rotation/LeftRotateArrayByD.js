@@ -1,5 +1,6 @@
 /**Given an array and an number d such that d <= nums.length.
- * Note if d > nums.length ~= (d%nums.length) times left rotation of array.
+ * 
+ * Note if d > nums.length ~= (d % nums.length) times left rotation of array.
  * So make d = d-n;
  * 
  * Left rotate the array arr by d places.
@@ -31,10 +32,10 @@
  * 
  * arr = [18,10,12,7]
  * 
- * Then d resembles number of elements which needs to be shifted at back in same order of occurence and rest elements to
+ * Then d resembles number of elements which needs to be shifted at back in same order of occurrence and rest elements to
  * come ahead.
  * Thus algo is push arr[0] to end
- * splice the first index element which is alredy being pushed to back.
+ * splice the first index element which is already being pushed to back.
  * Increment cnt till cnt<d (cnt start with 0)
  */
 function leftRotateByd(arr, d) {
@@ -78,7 +79,7 @@ function leftRotateBy1(arr) {
  * For arr index 0 and 1, i-d will be negative resembling these needs to be shifted towards back side of array.
  * Thus keep storing them in such cases in temp arr.
  * Else if(i-d >= 0) then the index at which these should be shifted inside array is [i-d] index thus move them.
- * In last starting puting temp varibales from arr.length-d index in arr.
+ * In last starting putting temp variables from arr.length-d index in arr.
  * 
  * After negative values of i-d being pushed to temp and in case of positive values arr[i] being shifted to arr[i-d]
  * arr  = [3,4,5,6,5,6]

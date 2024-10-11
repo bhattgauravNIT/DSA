@@ -19,7 +19,7 @@
    [3]
    2-2
 
-   See the pattern in index 0-0 is a subArray similary , 0-1 is a subarray, 0-2 is a subarray, then 1-1 is a subarray..... and so
+   See the pattern in index 0-0 is a subArray similarly , 0-1 is a subarray, 0-2 is a subarray, then 1-1 is a subarray..... and so
    on.
 */
 function maxProductSubArray(arr) {

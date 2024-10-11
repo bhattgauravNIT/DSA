@@ -5,8 +5,8 @@
 
 /**Approach: 0(n),O(1)
  * 
- * Have a (- infinty) as starting keep comparing every element with it, 
- * if array elemnet is greater than set max as array element and res as current index.
+ * Have a (- infinity) as starting keep comparing every element with it, 
+ * if array element is greater than set max as array element and res as current index.
  * 
  * Max is the max element and res will have index at which max is found.
  */

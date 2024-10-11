@@ -4,7 +4,10 @@
         "Heapfying",
         "Heapification",
         "Inorder",
+        "Kadane's",
         "logn",
-        "Preorder"
+        "nums",
+        "Preorder",
+        "unshift"
     ]
 }

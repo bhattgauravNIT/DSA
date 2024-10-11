@@ -9,7 +9,7 @@
  * 3rd range is 5->7
  * 4Th range is 15->18
  * 
- * The constratints are 0<= FromRange[i] <= 100 & 0<= toRange[i] <= 100
+ * The constraints are 0<= FromRange[i] <= 100 & 0<= toRange[i] <= 100
  * & fromRange[i] <= toRange[i].
  * 
  * 0/p is 5
@@ -26,9 +26,9 @@
 /**Approach1: 0(n*max) where max is 100, 0(max) =~ 0(1)
  * 
  * Since there is a constraint that 0<= fromRange[i],toRange[i] <= 100.
- * Therefore we cant have number greater than 100, thus use hasing to create a freq array of size 100.
+ * Therefore we cant have number greater than 100, thus use hashing to create a freq array of size 100.
  * 
- * Now from fromRange[i] till toRange[i] mark the occurence of elemnets in the freq array.
+ * Now from fromRange[i] till toRange[i] mark the occurrence of elements in the freq array.
  * 
  * In the end the index having the max value in freq array will be the number getting most repeated in all the range
  * queries.
@@ -64,8 +64,8 @@ function maxRepeatingEleInRange(fromRange, toRange) {
  * The problem with the above approach is if max is very large say max is also n then the above approach will
  * have time complexity of 0(n*max)=~ 0(n*n) = 0(n^2). Thus we need to trim it down.
  * 
- * Idea is from the fromRange[i] till toRange[i] instead of updating the freq of every elemnet present in this range
- * in the freq array, lets just mark the beegining and ending of the range in the freq array.
+ * Idea is from the fromRange[i] till toRange[i] instead of updating the freq of every element present in this range
+ * in the freq array, lets just mark the beginning and ending of the range in the freq array.
  * 
  * So ex: 
  *     FromRange = [1,2,5,15]
@@ -81,7 +81,29 @@ function maxRepeatingEleInRange(fromRange, toRange) {
  * for 3rd range:   Mark index 5 as ++ and 7+1 as --
  * for 4th range: Mark index 15 as ++ and index 18+1 as --.
  * 
+ * So lets formulate this
+ * freq = [0,0,0,0,0,...........................] upt0 100
+ * 
+ * 
+ * 1.for 1st range : Mark index 1 as ++ in freq and index 5+1 as --
+ * 
+ * freq = [0,1,0,0,0,0,-1]
+ * 
+ * 2.for 2nd range: Mark index 2 as ++ in freq and index 8+1 as --
+ * 
+ * freq = [0,1,1,0,0,0,-1,0,0,-1]
+ * 
+ * 3. for 3rd range:   Mark index 5 as ++ and 7+1 as --
+ * 
+ * freq = [0,1,1,0,0,1,-1,0,-1,-1]
+ * 
+ * 4. for 4th range: Mark index 15 as ++ and index 18+1 as --.
+ * 
+ * freq = [0,1,1,0,0,1,-1,0,-1,-1,0,0,0,0,0,1,0,0,0,-1]
+ * 
  * Now create on preFix sumArr from the freq arr.
+ * 
+ *  prefixSum = [0, 1, 2, 2, 2, 3, 2, 2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]
  * 
  * The index with most value in preFixSum arr is the number getting most repeated in the given ranges.
  * 
@@ -118,7 +140,7 @@ function maxRepeatingEleInRange1(fromRange, toRange) {
 }
 
 /**Approach2: Modified
- * In above we are creating a seperate prefix sum array instead we can simply modify the existing freq array.
+ * In above we are creating a separate prefix sum array instead we can simply modify the existing freq array.
  */
 
 function maxRepeatingEleInRange2(fromRange, toRange) {

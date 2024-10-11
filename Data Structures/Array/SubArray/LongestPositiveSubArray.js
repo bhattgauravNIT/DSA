@@ -10,8 +10,10 @@
 /**Approach 1: O(n^2),0(1)
  * 
  * Ex: arr = [1,2,3,-6,8,9,10,12,-9]
- * for every ith element where i starts from 0, see if we can start a subarray from it, if else keep checking
- * till be only get positives.
+ * 
+ * for every ith element where i starts from 0, see if we can start a subarray from it the keep iterating
+ * till we can make find the longest length starting from the starting point,
+ * 
  * Once a negative is reached check if its the max length subarray, if yes update max.
  * 
  * So i=0->arr.length

@@ -1,4 +1,4 @@
-/**Given an array arr, reverse the array in place, i,e revese the existing array only
+/**Given an array arr, reverse the array in place, i,e reverse the existing array only
  * 
  * Ex : arr = [10,5,7,30]
  *      arr = [30,7,5,10]
@@ -22,7 +22,7 @@ function reverseArray(arr) {
 
 /**Approach : O(n),O(1)
  * 
- * Idea is same as above just we are not using additional temp to swap i,e swapping without third varibale
+ * Idea is same as above just we are not using additional temp to swap i,e swapping without third variable
 */
 
 function reverseArray1(arr) {

@@ -38,7 +38,16 @@ function leadersInArray(arr) {
  * 
  * The last element will always be a leader as there is nothing right to it.
  * So initially make it as leader now keep iterating through last and if you find arr[i] > current leader than change the leader
- * to arr[i] and unsfift it in result.
+ * to arr[i] and unshift it in result.
+ * 
+ * Its worst case time complexity may become 0(n^2) as 
+ * Take an example of sorted array [6,5,4,3,2,1]
+ * 
+ * Here all the elements are leaders.
+ * 
+ * So for every n we have to do unshift operation which is 0(n) again thus 0(n^2)
+ * The better way is that if we found a leader than rather unshifting it we push it to res and then reverse the res using two pointer.
+ * 
 */
 function leadersInArray1(arr) {
     let res = [];

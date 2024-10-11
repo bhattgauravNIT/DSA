@@ -1,4 +1,6 @@
-/**given multiple queries which provide the starting and ending index in an given array.
+/**
+ * 
+ * Given multiple queries which provide the starting and ending index in an given array.
  * The task is to return the sum from [i,j] included for every query being given.
  * 
  * Ex: arr = [2,8,3,9,6,5,4]
@@ -11,7 +13,7 @@
 
 /**Approach1 : O(n),O(1)
  * 
- * Idea is fairly stratight itearte from i= start till end and calculate sum.
+ * Idea is fairly straight iterate from i= start till end and calculate sum.
  * The problem here is for every query we need a 0(n),0(1) complexity meaning if there are m queries , in total we
  * are gonna need 0(m*n),0(1) time to complete m queries for a n length arr.
 */
@@ -33,10 +35,10 @@ console.log(preFixSum([2, 8, 3, 9, 6, 5, 4], 2, 6))
  * The idea is let's say we have k number of queries with everyTime a different starting and ending index being passed.
  * If we were able to compute the sum in 0(1) time then for k queries. Then time complexity will be o(k) where k is the number of queries.
  * 
- * The idea is to maintain a preFixSumj array, say ex:
+ * The idea is to maintain a preFixSum array, say ex:
  * 
  * arr = [2, 8, 3, 9, 6, 5, 4];
- * so prefix sum arr is arr[i]+pfSum[pfSum.length-1];
+ * so prefix sum arr is arr[i] + pfSum[pfSum.length-1];
  * 
  * Thus pfSum is [2,10,13,22,28,33,37].
  * 
@@ -49,7 +51,7 @@ console.log(preFixSum([2, 8, 3, 9, 6, 5, 4], 2, 6))
  * So (PfSum till end from 0) is simply pfSum[end]
  * and (pfSum from 0 till start) is pfSum[start-1].
  * 
- * In this way the precomputation helps us in achieving this solution in 0(1) for every query being asked.
+ * In this way the pre computation helps us in achieving this solution in 0(1) for every query being asked.
  * 
  * 
 */

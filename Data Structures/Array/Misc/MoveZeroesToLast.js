@@ -7,7 +7,7 @@
 
 /**Approach2: 0(n*n),0(1)
  * 
- * The approach is simple, if we encounter a zero, keep finding till the point we dont encounter a zero, swap them.
+ * The approach is simple, if we encounter a zero, keep finding till the point we don't encounter a zero, swap them.
  */
 function moveZeroesToEnd(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -30,6 +30,11 @@ function moveZeroesToEnd(arr) {
  * Use additional space to store elements other than 0,
  * till the size of the temp array, keep replacing elements in original array and once temp size is reached make rest all of original
  * array elements as 0.
+ * 
+ * arr = [8,5,0,10,0,20]
+ * temp = [8,5,10,20]
+ * 
+ * now move all arr[i] = temp[i] and make remaining arr[i] as 0.
  */
 function moveZeroesToEnd1(arr) {
     let temp = [];
@@ -63,23 +68,23 @@ function moveZeroesToEnd1(arr) {
 /**Approach: O(n),O(1) 
  * 
  * Ex: [10,5,0,0,8]
- * Initally nz and z pointer is at index 0.
+ * Initially nz and z pointer is at index 0.
  * So nz is pointing to non zero value and z is also pointing to non zero value.
- * Since nz is pointing to non zero value swap with z pointer and incremnet both, so 10 gets swapped to itself.
+ * Since nz is pointing to non zero value swap with z pointer and increment both, so 10 gets swapped to itself.
  * 
  * Now nz is at index 1 and z is also at index 1.
  * Again nz is non zero so swap with z pointer. 
  * 5 gets swapped with itself.
  * Now again both incremented.
  * nz reached index 2 which is 0 and z also reached index 2 which is 0 value.
- * So nz is unhappy thus increase nz , nz beacome 3, whose index value is again 0, so again increase nz.
+ * So nz is unhappy thus increase nz , nz become 3, whose index value is again 0, so again increase nz.
  * Nz becomes 4 which is finally a non zero value so swap nz and z. z value was index 2.
  * Swap nz and z.
  * 
  * Algo:
  * Consider two pointers one non zero and other zero. 
  * Idea is simple, non zero pointer should always be at non zero value so if you find a non zero value , hold it there.
- * Perfomr swap with zero pointer then incremnet both.
+ * Perform swap with zero pointer then increment both.
  * If you see non zero pointer at zero value increment non zero pointer.
  * 
 */

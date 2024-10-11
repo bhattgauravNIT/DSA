@@ -22,7 +22,7 @@
  * 
  * 10,30,60,20,50,60
  * 
- * Its based on the fact that the sum fro subArray [10,20] will be nothing but the sum of previous subArray [10] + some 
+ * Its based on the fact that the sum for subArray [10,20] will be nothing but the sum of previous subArray [10] + some 
  * j element and so on...
  * 
  *  So if i have a pointer i= 0 till end of array and j starting from i till ending of j.
@@ -51,15 +51,15 @@ function hasSubArrayOfGivenSum(nums, k) {
  * 
  * Sliding window technique:
  * In the previous file where we were taking out maxSum of a kth length subArray, we knew what would be the size of the window
- * however in this case we dont know the size of the window and there for we will be using the concept in which the size of
+ * however in this case we don't know the size of the window and there for we will be using the concept in which the size of
  * the window will readjust accordingly.
  * 
- * Now let's say the window starts at i=0 intially and end at j=0 initially so i symbolises start of window and j symbolises
+ * Now let's say the window starts at i=0 initially and end at j=0 initially so i symbolize start of window and j symbolize
  * end of the window.
  *  lets have a sum initially as the arr[0].
- * If (current sm < sum) then the size of the window should increase as we need to accomodate more elements.
- * If current sm > sum , then we should shrink the size of the window as the current subArray cant accomodate any new 
- * element and by shirinking we mean to readuce the size by increasing the starting index of the window.
+ * If (current sm < sum) then the size of the window should increase as we need to accommodate more elements.
+ * If current sm > sum , then we should shrink the size of the window as the current subArray cant accommodate any new 
+ * element and by shrinking we mean to reduce the size by increasing the starting index of the window.
  * 
  * If current sm === sum then its true.
  */

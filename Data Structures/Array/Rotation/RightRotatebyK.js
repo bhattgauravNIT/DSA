@@ -8,8 +8,16 @@
  * after 3rd rotation: arr = [5,6,7,1,2,3,4]
  */
 
-/**Approach1: O(n*k):O(1) */
-function rightRotateby1(arr) {
+/**Approach1: O(n*k):O(1) 
+ * 
+ * The idea is to right rotate an array by k times i,e 
+ * 
+ * we can achieve right rotation by 1 via put the last element at the first place and then remove the last element from the
+ * array.
+ * 
+ * Repeat this process for k times.
+*/
+function rightRotateBy1(arr) {
     arr.unshift(arr[arr.length - 1]);
     arr.pop();
     return arr;
@@ -20,7 +28,7 @@ function rightRotateNumsByK(nums, k) {
     }
     let t = 1;
     while (t <= k) {
-        nums = rightRotateby1(nums);
+        nums = rightRotateBy1(nums);
         t++;
     }
 }

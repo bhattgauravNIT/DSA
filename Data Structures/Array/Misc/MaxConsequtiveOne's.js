@@ -1,4 +1,4 @@
-/**Given an binary array, find the count of max consequtive one's 
+/**Given an binary array, find the count of max consecutive one's 
  * 
  * Ex: arr = [0,1,1,0,0,1,1,1,1,0]
  * o/p is 4

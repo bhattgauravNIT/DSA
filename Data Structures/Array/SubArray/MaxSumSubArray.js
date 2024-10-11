@@ -34,7 +34,7 @@ function maxSumSubArray(arr) {
 /**Approach2: O(n^2),O(1)
  * Based on the fact that all the possible sums will be  1, 1+2, 1+2+3, 2, 2+3, 3
  * Ex: arr =[1,2,3]
- * Find sum of subarray 1 then 1,2 then 1,3 then 2, then 2,3 then 3 and take out max based on the fact that
+ * Find sum of subarray 1 then 1,2 then 1,2,3 then 2, then 2,3 then 3 and take out max based on the fact that
  * if you know sum of subarray [1,2] then simply if we add 3 to that sum it will be sum of subarray [1,2,3].
  */
 function maxSumSubArray1(arr) {
@@ -61,10 +61,10 @@ function maxSumSubArray1(arr) {
  * arr = [-5,1,-2,3,-1,2,-2];
  * At every index if we can take out the max possible sum at that index for sub array ending at that index.
  * 
- * So at -5, if a subarary is ending at -5, it can have max sum as -5 only beacuse there is nothing left to it.
+ * So at -5, if a subarray is ending at -5, it can have max sum as -5 only because there is nothing left to it.
  * at index of 1, there can be two sums 1 and ((-5)+1) that is -4. Out of (1,-4), 1 is greater so that will be max sum
  * at index of -2, there can be three possibilities, -2 itself or (1+(-2)) or (-5+1+(-2)) greater of all is -1.
- * Similary at other index same conecpt applies.
+ * Similarly at other index same concept applies.
  * 
  * Now after above computation if we look at the max sum for subarray at every specific index i, considering i will be the end
  * element of the subarray, we get.
@@ -83,6 +83,9 @@ function maxSumSubArray1(arr) {
  * 
  * Now initially for i=0, there is nothing left so the max sum at index 0 will be the index 0 only, thus maxSums[0] = -5.
  * Now, for i=1 (first pointer at arr).If arr[i]+arr[j] > arr[i] than maxSums should be pushed with arr[i]+arr[j].
+ * Because there were two possibilities of sum at i=1, i,e ith value of arr itself and (-5)+ ith value of arr itself thus we should take greater of
+ * the two and hence we say that if(arr[i]+arr[j]> arr[i]) then push arr[i]+arr[j] to maxSum as maxSums should contain maxSum at any index. 
+ * 
  * The jth element in maxSums is pointing to the previous obtained maxSum.
  * So 1+(-5) is not greater than 1 thus in this case we push arr[i] to maxSum.
  * 
@@ -117,7 +120,7 @@ function maxSumSubArray2(arr) {
 
 /**Approach3: 0(n),0(n) (Enhanced) 
  * 
- * In the above approach only, instead of maintaining finding max from maxSums in a seperate loop we can keep a max varibale
+ * In the above approach only, instead of maintaining finding max from maxSums in a separate loop we can keep a max variable
  * if the current element being pushed in maxSums is greater than max, then max = maxSums[maxSums.length-1];
  * where max should be the initially the first element of maxSums.
 */
@@ -139,11 +142,11 @@ function maxSumSubArray3(arr) {
     return max;
 }
 
-/** Approach4: 0(N),(1)
+/** Approach4: 0(n),(1)
  * 
- * In the above approach only instead of maintaining a seperate maxSums array we can use a prevMax variable whose initial
+ * In the above approach only instead of maintaining a separate maxSums array we can use a prevMax variable whose initial
  * value will be arr[0].
- * i will start from1.
+ * i will start from 1.
  * If arr[i]+ prevMax > arr[i] then prevMax should be updated to arr[i]+prevMax.
  * Previously we were pushing this to an array , instead now we are changing the prevMax itself.
  * 

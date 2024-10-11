@@ -1,5 +1,5 @@
 /** Given an array find all possible subArray.
- * A subArray is a contigious elements sub array of an array.
+ * A subArray is a contagious elements sub array of an array.
  * 
  * Ex: arr = [1,2,3]
  * All possible subArray is [1],[1,2],[1,2,3],[2],[2,3],[3]
@@ -13,12 +13,14 @@
  * 
  * [1], [1,2],[1,2,3]
    0-0  0-1   0-2
+
    [2], [2,3]
    1-1  1-2
+   
    [3]
    2-2
 
-   See the pattern in index 0-0 is a subArray similary , 0-1 is a subarray, 0-2 is a subarray, then 1-1 is a subarray..... and so
+   See the pattern in index 0-0 is a subArray similar , 0-1 is a subarray, 0-2 is a subarray, then 1-1 is a subarray..... and so
    on.
 */
 function allSubArray(arr) {

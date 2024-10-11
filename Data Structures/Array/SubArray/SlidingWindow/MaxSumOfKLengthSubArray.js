@@ -6,6 +6,7 @@
  * 
  */
 
+
 /**Approach1: 0(n*k),O(1)
  * 
  * Ex: arr = [1,8,30,-5,20,7]
@@ -16,7 +17,7 @@
  * 
  * So start with i=0 and take next k-1 elements as i=0 is already 1 element that can be part of the subArray.
  * Check for the max sum if its max update the max.
- * Again i=1 and take next k-1 elemnets and repeat the process.
+ * Again i=1 and take next k-1 elements and repeat the process.
  */
 function kLengthSubArrayMaxSum(nums, k) {
     let i = 0, max = Number.MIN_SAFE_INTEGER;
@@ -50,13 +51,13 @@ function kLengthSubArrayMaxSum(nums, k) {
  * 
  * Lets say initially we have a 3 number subSet that is 1,8,30 with i=0 as start
  * Now we stored its sum which is 39.
- * Now for the next elemnet that is -5 if we would take a subArray which starts with 1, i,e 8,30,-5.
+ * Now for the next element that is -5 if we would take a subArray which starts with 1, i,e 8,30,-5.
  * Its sum will be nothing but (39+(-5)-1).
- * That is from the already obtained sum of prtevious subArray if we reduce the first element of the previous
- * subArray and add the next elemnet which is -5 to that sum. the sum of the next subArray can be obtained.
+ * That is from the already obtained sum of previous subArray if we reduce the first element of the previous
+ * subArray and add the next element which is -5 to that sum. the sum of the next subArray can be obtained.
  * 
  * Similarly for index value 20. 
- * The previous subArray sum obtrained is (33) so to this if we add the value 20 and reduce the fisrt index value
+ * The previous subArray sum obtained is (33) so to this if we add the value 20 and reduce the first index value
  * of previous subArray we get 33+20-8 = 45.
  * 
  * Again repeat , note that if we take an i=0, than the value of i will go only upto (nums.length - k) to obtain of the k

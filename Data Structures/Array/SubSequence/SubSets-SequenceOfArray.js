@@ -5,8 +5,11 @@ A subarray and a subset are related concepts in the context of arrays or sets, b
 Subarray:
 
 A subarray is a contiguous sequence of elements within an array.
-Elements in a subarray must appear in the same order as they do in the original array.
+Elements in a subarray must appear in the same order as they do in the original array and should be contiguous
 For example, if you have an array [1, 2, 3, 4], then [2, 3] is a subarray, but [1, 3] is not because the elements are not contiguous in the original order.
+
+
+
 Subset:
 
 A subset is a collection of elements selected from a set (or an array), where the elements need to be in same order, and they don't necessarily need to be contiguous.
@@ -25,14 +28,14 @@ In summary, the key difference lies in the arrangement of elements and the requi
  * [2],
  * [3],
  * [1,2],
- * [2,3],
  * [1,3],
+ * [2,3],
  * [1,2,3]
  */
 
 /**Approach: 0(2^(sizeOfArray) * (size of array)) =~ 0(n*(2^n)),0(1)
  * 
- * Appraoch is based on bit magic same as finding subsets of a string.
+ * Approach is based on bit magic same as finding subsets of a string.
  * 
  * [],[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]
  * 

@@ -30,6 +30,16 @@ function insertElementAtIndex(arr, index, element) {
 }
 
 /**Approach2 : O(n),O(1) 
+ * 
+ * We try to create the space into the array by first kind of adding new element which is the last element itself
+   present in the array and then swapping elements till we reach the index value.
+   Then we simply insert the element at the index.
+
+   So the array look like now arr = [1,2,3,4,5]
+   Now start from j = arr.length till the input index and do arr[j] = arr[j-1]
+   So the input arr now will look like [1,2,3,3,4,5]
+
+   Now mark arr[index] = input element.
 */
 function insertElementAtIndex1(arr, index, element) {
     let j = arr.length;

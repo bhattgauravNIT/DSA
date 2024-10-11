@@ -3,34 +3,35 @@
  * 
  * Ex: arr = [1,1,0,0,0,1]
  * 
- * 1. Either we can flip consequtive 1's to 0.
- * So 1st flip -> Index 0to1 arr = [0,0,0,0,0,1]
- * 2nd flip -> Index 5to5   arr = [0,0,0,0,0,0]
+ * 1. Either we can flip consecutive 1's to 0.
+ * So 1st flip -> Index 0 to 1 arr = [0,0,0,0,0,1]
+ * 2nd flip -> Index 5 to 5   arr = [0,0,0,0,0,0]
  * 
  * all array element are same now with 2 flips.
  * 
  * So in total 2 flips are required if we flip all 1's.
  * 
- * 2. We flips consequtive 0's to 1
+ * 2. We flips consecutive 0's to 1
  * 
- * so 1 st flip index 2to4 arr = [1,1,1,1,1,1]
+ * so 1 st flip index 2 to 4 arr = [1,1,1,1,1,1]
  * 
  * all array elements are same now with only 1 flip.
  * 
- * So min(1,2) = 1. O/p is 1 and print : 2->4.
+ * So min(1,2) = 1. O/p is 1 and print : 2 -> 4.
  */
+
 
 /**Approach1: O(n), 0(n)
  * 
  * We iterate over the array maintaining zeroGrp array which stores the index of starting and ending of a zero group
- * being found and similairy for 1's group being found.
+ * being found and similarity for 1's group being found.
  * 
  * Ex:
  * arr = [1,1,0,0,0,1]
  * 
  * So zeroGroupCount = 1
  * oneGroupCount = 2
- * zeroGroupArr = [[2,5]]
+ * zeroGroupArr = [[2,4]]
  * oneGroupArr = [[0,1],[5,5]].
  * 
  * if zero group is less than one group : then zero group array should be considered for printing.
@@ -40,9 +41,9 @@
  * One special case when [1,1,1,1] that is zeroGroup is 0 and one group is 1, i,e zero grp is less.
  * Then the zeroGroupArray is not having length thus need to be taken care(line : 77)
  * 
- * Similary for [0,0,0,0] case(line: 89)
+ * Similarly for [0,0,0,0] case(line: 89)
  */
-function minConsequtiveFlips(nums) {
+function minConsecutiveFlips(nums) {
     let oneGroup = 0;
     let zeroGroup = 0;
     let zeroGroupArr = [];
@@ -99,7 +100,7 @@ function minConsequtiveFlips(nums) {
  * This needs two traversal.
  */
 
-function minConsequtiveFlips(nums) {
+function minConsecutiveFlips1(nums) {
     let oneGroup = 0;
     let zeroGroup = 0;
     let i = 0;
@@ -163,11 +164,13 @@ function minConsequtiveFlips(nums) {
 /**Approach 3: 0(n), 0(1); Single traversal
  * 
  * Its based on the fact that since its a binary array of zeroes and one's only therefore
- * if we flip the all the elemnets present in the array of second group that is being found
- * than it will always result in min consequtive flips. 
+ * if we flip all the elements present in the array of second group that is being found
+ * than it will always result in min consecutive flips. 
+ * 
+ * [1,1,0,0,0,1]
  */
 
-function minConsequtiveFlips(nums) {
+function minConsecutiveFlips2(nums) {
     let i = 0;
     let secondGrpEle = getSecondGroupElement(nums);
     while (i < nums.length) {

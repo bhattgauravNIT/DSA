@@ -1,5 +1,6 @@
-/**Given an array find the longest subarray length which has alternating even and odd elements.
- * By alternating we mean, that first elemnet can be any even or odd, however 
+/**
+ * Given an array find the longest subarray length which has alternating even and odd elements.
+ * By alternating we mean, that first element can be any even or odd, however 
  * if its even the next should be odd then next should be even and so on.........
  * 
  * Similarly if first element is odd then next should be even then should be odd and so on.......
@@ -9,7 +10,7 @@
  * O/p is 3
  * 
  * Ex: [2,2,2]
- * Clearly there is no alternating even odd here thus o/p is 1 beacuse a single elemnt subarray is also a subarray considered
+ * Clearly there is no alternating even odd here thus o/p is 1 because a single element subarray is also a subarray considered
  * alternating.
  */
 
@@ -17,7 +18,7 @@
  * 
  * EX: arr= [10,12,14,7,8];
  * For every j where j=i+1.
- * Check if there is a subsarray such that its having an alternating odd/even elemnet.
+ * Check if there is a subarray such that its having an alternating odd/even element.
  * for every i consider a j = i+1; and keep checking if 
  * j-1 is even than j should be odd
  * or
@@ -50,7 +51,7 @@ function longestAlternatingSubArray(arr) {
 }
 
 /**Approach2: 0(n),0(1) 
- * Kadanes Algo: Usage
+ * Kadane's Algo: Usage
  * 
  * For every ith index we will see if its an alternating element.
  * If its an alternating element, make it the part of subarray,
@@ -58,7 +59,7 @@ function longestAlternatingSubArray(arr) {
  * 
  * Ex: arr = [5,10,20,6,3,8];
  * start from i=1;
- * 10 is alternating even elemnet as previous to it 5 is odd. So make count it in subarray length,
+ * 10 is alternating even element as previous to it 5 is odd. So make count it in subarray length,
  * now at 20, its not alternating element so we should start fresh from here.
  * Now the maxLength achieved till now is 2 i,e 5 and 10.
  * 
