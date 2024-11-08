@@ -1,7 +1,6 @@
 **Rotation**
 
 
-
 **Problems**
 
 **1.Left rotate by one:**

@@ -1,100 +1,110 @@
-_Trees:_
+**_Trees:_**
 
-_Tree Traversal_:
 
--     ***Depth first Search**:*
 
-      As name suggest we need to search via depth of the binary tree, thus its depth first search algo.
+
+**_Tree Traversal_:**
+
+
+***Depth first Search**:*
+
+  As name suggest we need to search via depth of the binary tree, thus its depth first search algo.
+
 
   **1. Inorder:**
-  **Intuition:** Use a recursion to go via left->root->right.
-  Root needs to be printed or stored in arr.
 
-           **Algo:**
-               If root === null return (breaking condition for recursion)
-               calls function itself recursively with root->left
-               print root or push to array
-               calls function itself recursively wit root->right
+    **Intuition:** Use a recursion to go via left->root->right.
+                   Root needs to be printed or stored in arr.
+
+    **Algo:**
+          If root === null return (breaking condition for recursion)
+          calls function itself recursively with root->left
+          print root or push to array
+          calls function itself recursively wit root->right
 
 
 
   **2. Preorder:**
-  **Intuition:** Use a recursion to go via root->left->right
-  Root needs to be printed or stored in arr.
 
-           **Algo:**
-               If root === null return (breaking condition for recursion)
-               print root or push to array
-               calls function itself recursively with root->left
-               calls function itself recursively wit root->right
+    **Intuition:** Use a recursion to go via root->left->right
+                Root needs to be printed or stored in arr.
+
+    **Algo:**
+          If root === null return (breaking condition for recursion)
+          print root or push to array
+          calls function itself recursively with root->left
+          calls function itself recursively wit root->right
 
 
 
   **3. PostOrder:**
-  **Intuition:** Use a recursion to go via left->right->root
-  Root needs to be printed or stored in arr.
 
-           **Algo:**
-               If root === null return (breaking condition for recursion)
-               calls function itself recursively with root->left
-               calls function itself recursively wit root->right
-               print root or push to array
+    **Intuition:** Use a recursion to go via left->right->root
+               Root needs to be printed or stored in arr.
 
-
-
-
--     ***Breadth First Search (BFS)/Level Order traversal**
-
-      **1.Level Order Traversal**:
-            **Intuition:**
-                   Use a queue to maintain first in first out order and after the parent is pooped from queue
-                   push its children.
-
-            **Algo:**
-
-                 Maintain a queue.
-                 push root to queue.
-                 while(!q.isEmpty()){
-                  const val = pop from queue.
-                  print val.
-                  if(left of value exists){
-                    push left
-                  }
-                  if(right of value exists){
-                    push right
-                  }
-                 }
+    **Algo:**
+           If root === null return (breaking condition for recursion)
+           calls function itself recursively with root->left
+           calls function itself recursively wit root->right
+           print root or push to array
 
 
 
-      **2. Level Order Traversal Level By Level**:
-            **Intuition**
-                 In the initial stage a queue will be having all nodes present at a specific level of the binary tree.
+
+***Breadth First Search (BFS)/Level Order traversal**
+
+
+   **1.Level Order Traversal**:
+
+      **Intuition:** Use a queue to maintain first in first out order and after the parent is pooped from queue
+                  push its children.
+
+      **Algo:**
+
+             Maintain a queue.
+             push root to queue.
+             while(!q.isEmpty()){
+             const val = pop from queue.
+             print val.
+             if(left of value exists){
+             push left
+             }
+             if(right of value exists){
+             push right
+             }
+             }
+
+
+
+    **2. Level Order Traversal Level By Level**:
+            
+      **Intuition** In the initial stage a queue will be having all nodes present at a specific level of the binary tree.
                  Iterate over the queue and for it initial/existing size push child of the already present elements in queue.
 
-            **Algo:**
-
-                Maintain a queue.
-                Push root to queue.
-                while(!q.isEmpty()){
-                  let s = q.size();
-                  iterate over the queue
-                  const val = pop from queue
-                  if(val.right){
-                    push right node
-                  }
-                  if(val.left){
-                    push left node.
-                  }
-                }
-
-
-  -------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---------------------------
+      **Algo:**
+            Maintain a queue.
+            Push root to queue.
+            while(!q.isEmpty()){
+            let s = q.size();
+            iterate over the queue
+            const val = pop from queue
+            if(val.right){
+            push right node
+            }
+            if(val.left){
+            push left node.
+            }
+            }
 
 
-- _Conceptual Problems_
+-------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>---------------------------
 
-**1. Height of binary tree**:
+
+**- _Conceptual Problems_**
+
+
+**1. Height of binary tree:**
+
   **Problem**: Given a binary tree find its height. Height of a binary tree can be defined as the total number of
   nodes from root to leaf node on the longest path in the tree.
 

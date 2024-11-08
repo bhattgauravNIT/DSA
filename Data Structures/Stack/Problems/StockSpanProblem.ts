@@ -1,7 +1,7 @@
 /**Given an array resembling the prices of stock on any ith day, the problem is to find the span at every
  * ith day.
  * 
- * Stock span is defined as the number of consequtives values on the left of the ith day including the ith day
+ * Stock span is defined as the number of consecutive values on the left of the ith day including the ith day
  * which has values lesser or equal to the ith day price.
  * 
  * For ex: stock = [13,15,12,14,16,8,6,4,10,3]
@@ -22,7 +22,7 @@
 
 /**Approach1: 0(n^2),0(1)
  * 
- * This is a brute force solution where for every i starting from 1 we take a j=i-1 and itearte
+ * This is a brute force solution where for every i starting from 1 we take a j=i-1 and iterate
  * till we find the closest greater element to that of arr[i].
  * We keep counting and start the count from 1 only as that index is also being included in the count and
  * push this count to res.
@@ -47,7 +47,7 @@ function stockSpan(stockPrices: number[]): number[] {
 /**Approach2: 0(n),0(n)
  * 
  * The approach is based on the fact that span at any index will be equal to
- * the currentIndex - indexOfTheclosestGreater number from the elemnet.
+ * the currentIndex - indexOf the closest Greater number from the element.
  * 
  * For ex: [30,20,25,28,27,29]
  * 
@@ -65,12 +65,12 @@ function stockSpan(stockPrices: number[]): number[] {
  * 1. If we found the top of the stack having greater value as compared to the current indexed element we will simply
  * push (currentIndex - index os top of element) in res and will push arr[i] to stack.
  * 
- * 2.If the top is smaller than we keep poping from the stack until we found a top will have greater value 
+ * 2.If the top is smaller than we keep pooping from the stack until we found a top will have greater value 
  * than the current indexed element.
  * Once we found that simply push (i-index of top of stack) in res and push arr[i] to top of the stack.
  * 
  * There might me a condition that no element is greater to the left of the current indexed element and thus
- * we keep popoing from the stack and stack becomes empty in such case it means this is the largest
+ * we keep pooping from the stack and stack becomes empty in such case it means this is the largest
  * element in the arr and thus is span is i+1 as there will be in total i elements to the left of it which are
  * smaller and including itself it will be i+1.
  */

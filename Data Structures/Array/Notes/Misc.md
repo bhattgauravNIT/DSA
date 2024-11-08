@@ -1,7 +1,5 @@
 **Miscellaneous**
 
-
-
 **Problems**
 
 
@@ -567,7 +565,7 @@
                Maintain res=0 initially
                Maintain a leftMax = [arr[0]]
 
-               Pre compute leftMax arr;
+               Pre compute leftMax arr; 
 
                for(let i=1;i<arr.length-1;i++)
                {

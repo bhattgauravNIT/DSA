@@ -1,4 +1,4 @@
-/**The major difference between a linked list and an array is that an array is a contigious memory allocation datastructure, 
+/**The major difference between a linked list and an array is that an array is a contagious memory allocation data structure, 
  * however its not the case with a linked list. 
  * 
  * A linked list is comprised of nodes where every node can have a data and address/pointer to the next node .
@@ -20,7 +20,7 @@
  * 
  * i,e  
  *  
- * n1={data: 10, next: {data:20,next:null}}; We can visvulaize it in same way as we visvulaize a normal linked list have data and next pointing to the next node.
+ * n1={data: 10, next: {data:20,next:null}}; We can visualize it in same way as we visualize a normal linked list have data and next pointing to the next node.
  */
 
 
@@ -43,7 +43,7 @@ class Node {
     }
 }
 
-/**A linklist class:
+/**A linked list class:
  * 
  * 1.This class will be having a head which resembles the very first node of the linked list and it also serves as the starting point from where we start
  * traversal of the linked list.
@@ -62,19 +62,19 @@ class LinkedList {
     /* Add element to linked list in last by default.
     
     Create a node object with the data which needs to be inserted into the linked list.
-    If the linklist is of size zero, it means that this node has to be the first node or head node of this link list thus this.head = node.
-    If the linklist if not of zero size then we iterate till the end of the link list and then insert the node at the end.
+    If the link list is of size zero, it means that this node has to be the first node or head node of this link list thus this.head = node.
+    If the link list if not of zero size then we iterate till the end of the link list and then insert the node at the end.
 
     By insertion the node at the end , it means that the current existing last node address/next should be updated as this node.
     current.next = node
 
-    Why? current existing last node next should be updated as this new node. Beacuse in js we see linked list as 
+    Why? current existing last node next should be updated as this new node. Because in js we see linked list as 
     n1={data: 10, next: {data:20,next:null}};
     So let's say current we are at data:20 so its next should be node .
 
     We can also see it as Head-> [10,Node1] -> [20,Node2] -> [30,Null]
 
-    So if we are at current 30, so current.next = Node3 and by deafult Node3 next is null so the linklist gets modified as
+    So if we are at current 30, so current.next = Node3 and by default Node3 next is null so the link list gets modified as
     Head-> [10,Node1] -> [20,Node2] -> [30,Node3] -> [40,Null]
 
     And this new node will by default has next as null resembling it as the new end of the link list.
@@ -97,9 +97,9 @@ class LinkedList {
      * 
      * Here we are trying to insert a node at an index provided by user.
      * If the index < 0 or index> linkedList size then its not a valid index. Ex: linked list size is 3 it means its having index from 0,1,2, now if we try
-     * and insert a node at index 4 which is greater than the size of linklist then obviously its not a valid index.
+     * and insert a node at index 4 which is greater than the size of link list then obviously its not a valid index.
      * 
-     * We create a new node with the data probvided by user.Now
+     * We create a new node with the data provided by user.Now
      * If the index is 0, it means that we have to insert at the head. 
      * Thus the node.next should point to previous head (node.next = this.head) 
      * and this new node should be the new head.  (this.head=node);
@@ -110,9 +110,9 @@ class LinkedList {
      * 
      * We need to insert at index 2 a new node of data 50.
      * 
-     * So wile itearting we have a previous node [20,Node2] and current node as [30,Node3].
+     * So wile iterating we have a previous node [20,Node2] and current node as [30,Node3].
      * 
-     * Now a new node has to be inserted between them and thus node should point to previous's next which is current only and then previou's next should point to node.
+     * Now a new node has to be inserted between them and thus node should point to previous's next which is current only and then previous next should point to node.
      * 
      * node.next = previous.next; or node.next = current;
      * previous.next = node;
@@ -196,9 +196,9 @@ class LinkedList {
         }
     }
 
-    /**remove first occurence of element from list
+    /**remove first occurrence of element from list
      * 
-     * Here we are removing the node based on the data being probvided by the user.
+     * Here we are removing the node based on the data being provided by the user.
      * 
      * If the size of list is 0, it means its already empty.
      * 
@@ -231,7 +231,7 @@ class LinkedList {
     /**find the index of element
      * 
      * If the list is empty return -1.
-     * Iterate over the list and maintain an index varibale as soon as current.data===data to be found.
+     * Iterate over the list and maintain an index variable as soon as current.data===data to be found.
      * return i
      * Else keep checking ahead.
     */

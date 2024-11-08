@@ -3,19 +3,19 @@
 1. **Traversal:**
        **Directed or undirected:**
 
-           **BFS:**: (Resembels level order traversal)
+           **BFS:**: (Resembles level order traversal)
                 1.1------With source:
                           **Prob:**
-                                  First give me all the immediate connected vertex of the source after that give me the next level immediate connected vertex from the first neighboours and so on.
+                                  First give me all the immediate connected vertex of the source after that give me the next level immediate connected vertex from the first neighbors and so on.
 
                           **Algo:**
                                   Use queue, maintain a visited boolean array.
                                    Push source to queue.
-                                   mark it visisted.
+                                   mark it visited.
                                    while(!q.isEmpty())
                                    pop and print
-                                   travese through adjacency of that source
-                                   if not visisted neighbour push to q.
+                                   traverse through adjacency of that source
+                                   if not visited neighbor push to q.
                                    mark as visited.
 
                             **Note:**
